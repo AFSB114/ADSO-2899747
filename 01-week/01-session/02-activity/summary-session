@@ -1,7 +1,6 @@
-El resumen de la sesión de clase abordó varios temas clave para el desarrollo de software, centrándose en la organización y trazabilidad del trabajo.
+La clase abordó varios temas clave para el desarrollo de software, centrándose en la organización y trazabilidad del trabajo.
 
-Primero, se discutió la importancia de documentar cada paso y resultado obtenido para especificar el trabajo realizado. 
-Esto garantiza que se mantenga un orden y una trazabilidad clara en el repositorio.
+Primero, se discutió la importancia de documentar cada paso y resultado obtenido para especificar el trabajo realizado, esto garantiza que se mantenga un orden y una trazabilidad clara en el proyecto.
 
 Se definieron los diferentes ambientes de trabajo para organizar el desarrollo y las pruebas. Estos incluyeron:
 - dev: el ambiente de desarrollo.
@@ -9,12 +8,12 @@ Se definieron los diferentes ambientes de trabajo para organizar el desarrollo y
 - main: la rama principal y estable.
 - project: para la integración temporal de proyectos cuando sea necesario.
 
-También se explicó el concepto de "Merge Request" (o Pull Request), que es una solicitud para fusionar cambios de una rama a otra
+También se explicó el concepto de "Merge Request" (o Pull Request), que es una solicitud para fusionar cambios de una rama a otra.
 Se indicó que el título de estas solicitudes debe incluir el identificador de la historia de usuario (`HU-xxxx`) y una breve descripción
 Por ejemplo, un título podría ser `[HU-19630] optimize taxpayer endpoint`
 Se recomienda que el cuerpo del pull request contenga un checklist
 
-Se clasificaron los tipos de trabajo que se pueden realizar, los cuales también se usan para nombrar las ramas[cite: 6]. Estos tipos son:
+Se clasificaron los tipos de trabajo que se pueden realizar, los cuales también se usan para nombrar las ramas. Estos tipos son:
 - feature: para trabajos que añaden nuevas funcionalidades.
 - bugfix: para corregir defectos.
 - hotfix: para correcciones urgentes en producción.
@@ -22,5 +21,4 @@ Se clasificaron los tipos de trabajo que se pueden realizar, los cuales también
 - chore: para tareas de mantenimiento, como la gestión de dependencias.
 - spike: para investigaciones o experimentos cortos.
 
-Finalmente, la clase abordó la importancia de la gestión de roles y la seguridad, que incluye la revisión y el control de cambios.
-Se enfatizó que se debe trabajar en una rama por cada historia de usuario, realizar `rebase` frecuente sobre `main` o `qa` para evitar conflictos, y cerrar la rama una vez que el "pull request" se apruebe y se fusione.
+Se enfatizó que se debe trabajar en una rama por cada historia de usuario, realizar "rebase" frecuente sobre "main" o "qa" para evitar conflictos, y cerrar la rama una vez que el "pull request" se apruebe y se fusione.
