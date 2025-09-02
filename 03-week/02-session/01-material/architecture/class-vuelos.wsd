@@ -1,0 +1,155 @@
+@startuml class-vuelos
+' Diagrama de clases — Vuelos nacionales e internacionales
+' Reglas: PascalCase para clases, camelCase para atributos, sin getters/setters ni CRUD
+skinparam classAttributeIconSize 0
+skinparam dpi 150
+
+' ===== Enumeraciones
+enum TipoVuelo {
+  NACIONAL
+  INTERNACIONAL
+}
+
+' ===== Geografía
+class Continente {
+  -id: int
+  -nombre: string
+  -descripcion: string
+}
+
+class Pais {
+  -id: int
+  -nombre: string
+  -descripcion: string
+}
+
+class Departamento {
+  -id: int
+  -nombre: string
+  -descripcion: string
+}
+
+class Ciudad {
+  -id: int
+  -nombre: string
+  -descripcion: string
+}
+
+' ===== Infraestructura aeroportuaria
+class Aeropuerto {
+  -id: int
+  -nombre: string
+  -direccion: string
+}
+
+class Terminal {
+  -id: int
+  -codigo: string
+  -nombre: string
+}
+
+class PuertaEmbarque {
+  -id: int
+  -codigo: string
+  -nombre: string
+}
+
+' ===== Aeronaves
+class TipoAeronave {
+  -id: int
+  -codigo: string
+  -nombre: string
+}
+
+class Aeronave {
+  -id: int
+  -fabricante: string
+  -matricula: string
+  -horaUso: int
+}
+
+' ===== Personas
+abstract class Persona {
+  -id: int
+  #tipoDocumento: string
+  #numeroDocumento: string
+  #nombre: string
+  #apellido: string
+  #fechaNacimiento: Date
+  #correo: string
+  #numeroCelular: string
+}
+
+class Empleado {
+  #salario: decimal
+  #rol: string
+}
+
+class Pasajero {
+}
+
+class Tripulacion {
+  -id: int
+}
+
+class Equipaje {
+  -id: int
+  -codigo: string
+}
+
+' ===== Programación de vuelos y boletos
+class Programacion {
+  -id: int
+  -fechaVuelo: Date
+  -horaSalida: Time
+  -horaLlegada: Time
+  -tipoVuelo: TipoVuelo
+}
+
+class Boleto {
+  -id: int
+  -codigo: string
+}
+
+' ===== Interface para demostrar implementación (no CRUD, sin getters/setters)
+interface Tripulable {
+  +asignarTripulacion(t: Tripulacion)
+  +asignarAeronave(a: Aeronave)
+}
+
+' ===== Relaciones (UML, no FKs de MR)
+' Geografía (agrupaciones territoriales)
+Continente "1" o-- "0..*" Pais : agrupa >
+Pais "1" o-- "0..*" Departamento : agrupa >
+Departamento "1" o-- "0..*" Ciudad : agrupa >
+
+' Aeropuerto estructura
+Ciudad "1" o-- "0..*" Aeropuerto : tiene >
+Aeropuerto "1" *-- "1..*" Terminal : compone >
+Terminal "1" *-- "1..*" PuertaEmbarque : compone >
+
+' Aeronaves
+TipoAeronave "1" o-- "0..*" Aeronave : clasifica >
+
+' Programación, aeronave y puertas
+Aeronave "1" o-- "0..*" Programacion : asignada a >
+PuertaEmbarque "1" o-- "0..*" Programacion : origen
+PuertaEmbarque "1" o-- "0..*" Programacion : destino
+
+' Personas y roles
+Persona <|-- Empleado
+Persona <|-- Pasajero
+
+' Tripulación asignada a un vuelo (composición por ciclo de vida)
+Programacion "1" *-- "1..*" Tripulacion : asigna >
+Tripulacion "1" -- "1" Empleado : integra >
+
+' Pasajero, equipaje y boletos
+Pasajero "1" *-- "0..*" Equipaje : posee >
+Pasajero "1" o-- "0..*" Boleto : compra >
+Programacion "1" o-- "0..*" Boleto : para >
+
+' Implementación
+Programacion ..|> Tripulable
+
+@enduml

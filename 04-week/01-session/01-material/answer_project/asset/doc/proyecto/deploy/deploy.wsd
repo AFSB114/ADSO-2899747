@@ -1,0 +1,34 @@
+@startuml
+title Flight Management System – Deployment Diagram
+
+node "AWS Cloud" {
+  
+  node "Container Cluster" {
+    
+    node "Frontend Container" {
+      component "Web App\nReact" as Web
+      component "Mobile App\nIonic React" as Mobile
+    }
+    
+    node "Backend Container" {
+      component "Spring Boot\nAPI" as API
+    }
+    
+    node "Database Container" {
+      database "PostgreSQL" as DB
+    }
+    
+    API --> DB : JDBC
+    Web --> API : REST/HTTPS
+    Mobile --> API : REST/HTTPS
+  }
+  
+  node "CI/CD Pipeline" {
+    component "Jenkins" as Jenkins
+    component "GitHub Repo\nBranches: develop, qa, main" as GitHub
+    GitHub --> Jenkins : Webhook/Clone
+    Jenkins --> "Container Cluster" : Build & Deploy
+  }
+}
+
+@enduml

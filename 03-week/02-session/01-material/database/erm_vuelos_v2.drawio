@@ -1,0 +1,118 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="ERM - Vuelos (Safe)" id="56ce8884ea2d">
+    <mxGraphModel dx="1226" dy="849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3" value="&lt;b&gt;continente&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;nombre&lt;br/&gt;descripcion&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="&lt;b&gt;pais&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;nombre&lt;br/&gt;descripcion&lt;br/&gt;FK: continente_id → continente.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="&lt;b&gt;departamento&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;nombre&lt;br/&gt;descripcion&lt;br/&gt;FK: pais_id → pais.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="40" y="380" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="&lt;b&gt;ciudad&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;nombre&lt;br/&gt;descripcion&lt;br/&gt;FK: departamento_id → departamento.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="40" y="560" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="&lt;b&gt;aeropuerto&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;nombre&lt;br/&gt;direccion&lt;br/&gt;FK: ciudad_id → ciudad.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="340" y="290" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="&lt;b&gt;terminal&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;codificacion&lt;br/&gt;nombre&lt;br/&gt;FK: aeropuerto_id → aeropuerto.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="540" y="70" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="&lt;b&gt;puerta_embarque&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;codificacion&lt;br/&gt;nombre&lt;br/&gt;FK: terminal_id → terminal.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="800" y="230" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="&lt;b&gt;tipo_aeronave&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;codigo&lt;br/&gt;nombre&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="60" y="1090" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="&lt;b&gt;aeronave&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;fabricante&lt;br/&gt;matricula&lt;br/&gt;hora_uso&lt;br/&gt;FK: tipo_aeronave_id → tipo_aeronave.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="340" y="860" width="240" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="&lt;b&gt;empleado&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;salario&lt;br/&gt;rol&lt;br/&gt;FK: persona_id → persona.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1090" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="&lt;b&gt;pasajero&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;FK: persona_id → persona.id&lt;br/&gt;FK: boleto_id → boleto.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1350" y="600" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="&lt;b&gt;equipaje&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;codigo&lt;br/&gt;FK: pasajero_id → pasajero.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1540" y="850" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="&lt;b&gt;programacion&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;fecha_vuelo&lt;br/&gt;hora_salida&lt;br/&gt;hora_llegada&lt;br/&gt;tipo_vuelo&lt;br/&gt;FK: origen_puerta_embarque_id → puerta_embarque.id&lt;br/&gt;FK: destino_puerta_embarque_id → puerta_embarque.id&lt;br/&gt;FK: aeronave_id → aeronave.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="640" y="524" width="240" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="&lt;b&gt;boleto&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;codigo&lt;br/&gt;FK: programacion_id → programacion.id&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1130" y="380" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="18" value="&lt;b&gt;tripulacion&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;FK: empleado_id → empleado.id&lt;br/&gt;FK: programacion_id → programacion.id&lt;br/&gt;rol_en_vuelo (opcional)&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="660" y="900" width="240" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="19" value="&lt;i&gt;Correcciones: &#39;cuidad&#39;→&#39;ciudad&#39;, &#39;areonave&#39;→&#39;aeronave&#39;, &#39;codificaicon&#39;→&#39;codificacion&#39;, &#39;oriegen&#39;→&#39;origen&#39;.&lt;/i&gt;" style="shape=note;whiteSpace=wrap;html=1;strokeColor=#9CA3AF;fillColor=#FEF3C7;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="40" y="740" width="560" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="N:1 (cada país pertenece a 1 continente)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;flowAnimation=0;shadow=0;" parent="1" source="4" target="3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="N:1 (muchos departamentos por país)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="5" target="4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="22" value="N:1 (muchas ciudades por departamento)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="6" target="5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="23" value="N:1 (muchos aeropuertos por ciudad)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="7" target="6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="24" value="N:1 (múltiples terminales por aeropuerto)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="8" target="7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="25" value="N:1 (múltiples puertas por terminal)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="9" target="8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="26" value="N:1 (una aeronave es de un tipo)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="11" target="10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="27" value="N:1 (cada empleado referencia una persona)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;strokeColor=#FF113C;" parent="1" source="13" target="12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28" value="N:1 (cada pasajero referencia una persona)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="14" target="12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="29" value="N:1 (pasajero con múltiples equipajes)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="15" target="14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="30" value="N:1 (muchas programaciones por aeronave)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="16" target="11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="31" value="N:1 (muchos boletos por programación)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="17" target="16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="32" value="N:1 (varias filas por empleado)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="18" target="13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="33" value="N:1 (varias filas por programación)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="18" target="16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="34" value="N:1 (origen)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="16" target="9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="35" value="N:1 (destino)" style="endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;html=1;strokeWidth=1;" parent="1" source="16" target="9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="36" value="1:1 (modelo actual)" style="endArrow=ERone;endFill=0;startArrow=ERone;startFill=0;html=1;strokeWidth=1;" parent="1" source="14" target="17" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GavWCoUBOEf9S78MXq3v-36" value="" style="endArrow=ERone;endFill=0;startArrow=ERone;startFill=0;html=1;strokeWidth=1;strokeColor=#FF1325;" edge="1" parent="1" source="14" target="12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1163" y="949" as="sourcePoint" />
+            <mxPoint x="877" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12" value="&lt;b&gt;persona&lt;/b&gt;&lt;div style=&quot;margin-top:6px&quot;&gt;PK: id&lt;br/&gt;tipo_documento&lt;br/&gt;numero_documento&lt;br/&gt;nombre&lt;br/&gt;apellido&lt;br/&gt;fecha_nacimiento&lt;br/&gt;correo&lt;br/&gt;numero_celular&lt;/div&gt;" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;fillColor=#ffffff;strokeColor=#111111;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1150" y="820" width="240" height="190" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

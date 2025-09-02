@@ -1,0 +1,76 @@
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor #1f2937
+  ArrowColor #4b5563
+}
+skinparam ActorStyle awesome
+
+title Flight Management System – Use Case Diagram
+
+actor "Passenger" as Passenger
+actor "Employee" as Employee
+actor "Admin" as Admin
+actor "Notification Service" as Notifier
+
+package "Passengers & Services" {
+  (Search Flight) as UC_Search
+  (Select Flight) as UC_Select
+  (Book Flight) as UC_Book
+  (Payment) as UC_Payment
+  (Check-in) as UC_Checkin
+  (Baggage Registration) as UC_Baggage
+}
+
+package "Flight Operations" {
+  (Schedule Flight) as UC_Schedule
+  (Assign Crew) as UC_Assign
+  (Validate Employee) as UC_Validate
+}
+
+package "Security & HR" {
+  (Login) as UC_Login
+  (Manage Roles) as UC_Roles
+  (Manage User Accounts) as UC_Users
+  (Manage Employees) as UC_Employees
+}
+
+package "Notifications" {
+  (Send Notification) as UC_Notify
+  (Flight Delay Alert) as UC_Alert
+}
+
+' Relaciones de actores
+Passenger --> UC_Search
+Passenger --> UC_Book
+Passenger --> UC_Checkin
+
+Employee --> UC_Assign
+Employee --> UC_Validate
+
+Admin --> UC_Login
+Admin --> UC_Roles
+Admin --> UC_Users
+Admin --> UC_Employees
+Admin --> UC_Schedule
+
+Notifier --> UC_Notify
+
+' Includes (reutilización)
+UC_Book ..> UC_Select : <<include>>
+UC_Book ..> UC_Payment : <<include>>
+UC_Assign ..> UC_Validate : <<include>>
+
+' Extends (comportamiento opcional/condicional)
+UC_Checkin ..> UC_Baggage : <<extend>>
+UC_Notify ..> UC_Alert : <<extend>>
+
+legend right
+  == Leyenda ==
+  <<include>>: Reutiliza funcionalidad común
+  <<extend>>: Flujo opcional/condicional
+endlegend
+@enduml

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="1600" height="1100">
+  <defs>
+    <style><![CDATA[
+      .title{font:700 14px system-ui,Segoe UI,Arial;fill:#e5e7eb}
+      .attr{font:12px system-ui,Segoe UI,Arial;fill:#cbd5e1}
+      .box{fill:#0b1220;stroke:#667085;stroke-width:1.2}
+      .pk{fill:#34d399}
+      .fk{fill:#f59e0b}
+      .line{stroke:#a78bfa;stroke-width:1.4}
+      .card{font:600 12px system-ui,Segoe UI,Arial;fill:#a78bfa}
+      .bg{fill:#0f172a}
+    ]]></style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#a78bfa"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1600" height="1100"/>
+
+  <!-- Geography column -->
+  <g transform="translate(40,40)">
+    <g id="continente">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="250" height="90"/>
+      <text class="title" x="12" y="24">continente</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <text class="attr" x="12" y="66">nombre, descripcion</text>
+    </g>
+    <g id="pais" transform="translate(0,130)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="250" height="110"/>
+      <text class="title" x="12" y="24">pais</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">continente_id</text>
+      <text class="attr" x="12" y="88">nombre, descripcion</text>
+    </g>
+    <g id="departamento" transform="translate(0,280)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="250" height="110"/>
+      <text class="title" x="12" y="24">departamento</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">pais_id</text>
+      <text class="attr" x="12" y="88">nombre, descripcion</text>
+    </g>
+    <g id="ciudad" transform="translate(0,430)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="250" height="110"/>
+      <text class="title" x="12" y="24">ciudad</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">departamento_id</text>
+      <text class="attr" x="12" y="88">nombre, descripcion</text>
+    </g>
+  </g>
+
+  <!-- Infrastructure column -->
+  <g transform="translate(330,180)">
+    <g id="aeropuerto">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="110"/>
+      <text class="title" x="12" y="24">aeropuerto</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">ciudad_id</text>
+      <text class="attr" x="12" y="88">nombre, direccion</text>
+    </g>
+    <g id="terminal" transform="translate(0,150)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="110"/>
+      <text class="title" x="12" y="24">terminal</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">aeropuerto_id</text>
+      <text class="attr" x="12" y="88">codificacion, nombre</text>
+    </g>
+    <g id="puerta" transform="translate(0,300)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="110"/>
+      <text class="title" x="12" y="24">puerta_embarque</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">terminal_id</text>
+      <text class="attr" x="12" y="88">codificacion, nombre</text>
+    </g>
+  </g>
+
+  <!-- Fleet column -->
+  <g transform="translate(650,60)">
+    <g id="tipo_aeronave">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="270" height="100"/>
+      <text class="title" x="12" y="24">tipo_aeronave</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <text class="attr" x="12" y="68">codigo, nombre</text>
+    </g>
+    <g id="aeronave" transform="translate(0,130)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="270" height="120"/>
+      <text class="title" x="12" y="24">aeronave</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">tipo_aeronave_id</text>
+      <text class="attr" x="12" y="92">fabricante, matricula, hora_uso</text>
+    </g>
+  </g>
+
+  <!-- People column -->
+  <g transform="translate(650,360)">
+    <g id="persona">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="300" height="150"/>
+      <text class="title" x="12" y="24">persona</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <text class="attr" x="12" y="68">tipo_documento, numero_documento</text>
+      <text class="attr" x="12" y="88">nombre, apellido</text>
+      <text class="attr" x="12" y="108">fecha_nacimiento, correo, numero_celular</text>
+    </g>
+    <g id="empleado" transform="translate(330,0)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="110"/>
+      <text class="title" x="12" y="24">empleado</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">persona_id</text>
+      <text class="attr" x="12" y="92">salario, rol</text>
+    </g>
+    <g id="pasajero" transform="translate(330,130)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="120"/>
+      <text class="title" x="12" y="24">pasajero</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">persona_id</text>
+      <circle class="fk" cx="16" cy="88" r="4"/><text class="attr" x="26" y="91">boleto_id</text>
+    </g>
+    <g id="equipaje" transform="translate(330,280)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="100"/>
+      <text class="title" x="12" y="24">equipaje</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">pasajero_id</text>
+      <text class="attr" x="12" y="92">codigo</text>
+    </g>
+  </g>
+
+  <!-- Operations column -->
+  <g transform="translate(40,680)">
+    <g id="programacion">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="560" height="160"/>
+      <text class="title" x="12" y="24">programacion</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">origen_puerta_embarque_id</text>
+      <circle class="fk" cx="16" cy="88" r="4"/><text class="attr" x="26" y="91">destino_puerta_embarque_id</text>
+      <circle class="fk" cx="16" cy="110" r="4"/><text class="attr" x="26" y="113">aeronave_id</text>
+      <text class="attr" x="12" y="136">fecha_vuelo, hora_salida, hora_llegada, tipo_vuelo</text>
+    </g>
+    <g id="boleto" transform="translate(590,0)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="100"/>
+      <text class="title" x="12" y="24">boleto</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">programacion_id</text>
+      <text class="attr" x="12" y="92">codigo</text>
+    </g>
+    <g id="tripulacion" transform="translate(590,120)">
+      <rect class="box" x="0" y="0" rx="8" ry="8" width="260" height="100"/>
+      <text class="title" x="12" y="24">tripulacion</text>
+      <circle class="pk" cx="16" cy="44" r="4"/><text class="attr" x="26" y="47">id</text>
+      <circle class="fk" cx="16" cy="66" r="4"/><text class="attr" x="26" y="69">empleado_id</text>
+      <circle class="fk" cx="16" cy="88" r="4"/><text class="attr" x="26" y="91">programacion_id</text>
+    </g>
+  </g>
+
+  <!-- Relationships and cardinalities -->
+  <!-- Geography chain 1-N -->
+  <g>
+    <line class="line" x1="290" y1="85" x2="330" y2="310"/>
+    <text class="card" x="300" y="180">1</text>
+    <text class="card" x="315" y="275">N</text>
+  </g>
+  <g>
+    <line class="line" x1="290" y1="235" x2="330" y2="310"/>
+    <text class="card" x="305" y="255">1</text>
+    <text class="card" x="320" y="300">N</text>
+  </g>
+  <g>
+    <line class="line" x1="290" y1="385" x2="330" y2="310"/>
+    <text class="card" x="305" y="360">1</text>
+    <text class="card" x="320" y="330">N</text>
+  </g>
+
+  <!-- ciudad -> aeropuerto (1-N) -->
+  <g>
+    <line class="line" x1="290" y1="535" x2="330" y2="255"/>
+    <text class="card" x="300" y="505">1</text>
+    <text class="card" x="325" y="275">N</text>
+  </g>
+  <!-- aeropuerto -> terminal (1-N) -->
+  <g>
+    <line class="line" x1="460" y1="290" x2="460" y2="360"/>
+    <text class="card" x="465" y="305">1</text>
+    <text class="card" x="465" y="350">N</text>
+  </g>
+  <!-- terminal -> puerta (1-N) -->
+  <g>
+    <line class="line" x1="460" y1="440" x2="460" y2="510"/>
+    <text class="card" x="465" y="455">1</text>
+    <text class="card" x="465" y="500">N</text>
+  </g>
+
+  <!-- tipo_aeronave -> aeronave (1-N) -->
+  <g>
+    <line class="line" x1="785" y1="160" x2="785" y2="215"/>
+    <text class="card" x="790" y="175">1</text>
+    <text class="card" x="790" y="205">N</text>
+  </g>
+
+  <!-- persona -> empleado (1-1) representado como 1-N restringido -->
+  <g>
+    <line class="line" x1="800" y1="460" x2="980" y2="460"/>
+    <text class="card" x="860" y="455">1</text>
+    <text class="card" x="960" y="455">1</text>
+  </g>
+  <!-- persona -> pasajero (1-N) -->
+  <g>
+    <line class="line" x1="800" y1="500" x2="980" y2="545"/>
+    <text class="card" x="860" y="505">1</text>
+    <text class="card" x="960" y="545">N</text>
+  </g>
+  <!-- pasajero -> equipaje (1-N) -->
+  <g>
+    <line class="line" x1="980" y1="600" x2="980" y2="670"/>
+    <text class="card" x="985" y="620">1</text>
+    <text class="card" x="985" y="660">N</text>
+  </g>
+
+  <!-- programacion -> boleto (1-N) -->
+  <g>
+    <line class="line" x1="630" y1="760" x2="1180" y2="760"/>
+    <text class="card" x="900" y="750">1</text>
+    <text class="card" x="1160" y="750">N</text>
+  </g>
+  <!-- empleado N-N programacion via tripulacion (representamos con dos 1-N) -->
+  <g>
+    <line class="line" x1="1060" y1="430" x2="1180" y2="840"/>
+    <text class="card" x="1110" y="640">N</text>
+  </g>
+  <g>
+    <line class="line" x1="630" y1="820" x2="1180" y2="840"/>
+    <text class="card" x="900" y="835">N</text>
+  </g>
+
+  <!-- programacion -> puerta origen/destino (N-1 a cada puerta) -->
+  <g>
+    <line class="line" x1="300" y1="840" x2="460" y2="590"/>
+    <text class="card" x="360" y="780">N</text>
+    <text class="card" x="455" y="600">1</text>
+  </g>
+  <g>
+    <line class="line" x1="300" y1="860" x2="460" y2="590"/>
+    <text class="card" x="360" y="820">N</text>
+    <text class="card" x="455" y="600">1</text>
+  </g>
+</svg>

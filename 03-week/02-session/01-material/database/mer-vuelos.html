@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MER – Vuelos nacionales e internacionales</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --panel:#111827; /* gray-900 */
+      --muted:#94a3b8; /* slate-400 */
+      --text:#e5e7eb; /* gray-200 */
+      --accent:#22d3ee; /* cyan-400 */
+      --accent-2:#a78bfa; /* violet-400 */
+      --ok:#34d399; /* emerald-400 */
+      --warn:#f59e0b; /* amber-500 */
+      --danger:#f87171; /* red-400 */
+      --card:#0b1220; /* deep */
+      --chip:#1f2937; /* gray-800 */
+    }
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 700px at 10% -10%,rgba(34,211,238,.15),transparent),radial-gradient(1000px 500px at 110% 10%,rgba(167,139,250,.12),transparent),var(--bg);color:var(--text);font:14px/1.6 system-ui,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--accent)}
+    .container{max-width:1100px;margin:auto;padding:32px 20px}
+    header h1{margin:0 0 6px 0;font-size:28px;letter-spacing:.3px}
+    header .meta{color:var(--muted)}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .hero{display:flex;gap:22px;align-items:center;padding:18px 18px;margin-top:20px}
+    .hero .tag{background:var(--chip);color:#cbd5e1;border:1px solid rgba(255,255,255,.06);padding:4px 10px;border-radius:999px;font-size:12px}
+    .grid{display:grid;gap:18px;margin-top:22px}
+    @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
+    details{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px}
+    summary{cursor:pointer;font-weight:600;color:#e2e8f0}
+    .step{padding:12px 14px;border-left:3px solid rgba(34,211,238,.35);background:rgba(2,6,23,.4);border-radius:10px;margin:10px 0}
+    .step h3{margin:0 0 8px 0;font-size:16px;color:#f8fafc}
+    .pill{display:inline-block;background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.35);color:#a5f3fc;padding:2px 8px;border-radius:999px;margin-right:6px;font-size:12px}
+    .dict{width:100%;border-collapse:collapse;margin-top:8px}
+    .dict th,.dict td{border:1px solid rgba(255,255,255,.08);padding:8px 10px;vertical-align:top}
+    .dict th{background:#0b1220;color:#cbd5e1;font-weight:600}
+    .dict tr:nth-child(even){background:rgba(255,255,255,.03)}
+    .legend{display:flex;gap:10px;flex-wrap:wrap}
+    .legend .item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:6px 10px;border-radius:8px}
+    .legend .dot{width:12px;height:12px;border-radius:50%}
+    .svg-wrap{padding:12px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px}
+    .note{color:var(--muted);font-size:13px}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:#0b1220;border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:6px}
+    footer{margin:28px 0 10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Modelo Entidad–Relación (MER) – Vuelos nacionales e internacionales</h1>
+      <div class="meta">Base: Taller 1 + insumos de <span class="kbd">mer-vuelos.md</span></div>
+      <div class="hero panel">
+        <span class="tag">Objetivo</span>
+        <div>Documentar el dominio, explicar el diseño paso a paso y presentar un MER en SVG listo para revisión.</div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div>
+        <h2>1) Alcance y supuestos</h2>
+        <p>El dominio cubre geografía (continente→país→departamento→ciudad), infraestructura aeroportuaria (aeropuerto→terminal→puerta de embarque), flota (tipo de aeronave→aeronave), personas (persona→empleado y persona→pasajero) y operación (programación de vuelo, tripulación, boletos, equipaje).</p>
+        <details open>
+          <summary>Normalización y correcciones de nombres</summary>
+          <ul>
+            <li><span class="pill">ciudad</span> en lugar de <em>cuidad</em>.</li>
+            <li><span class="pill">aeronave</span> en lugar de <em>areonave</em>.</li>
+            <li><span class="pill">codificacion</span> en lugar de <em>codificaicon</em>.</li>
+            <li><span class="pill">origen_puerta_embarque_id</span> en lugar de <em>oriegen_puerta_embarque_id</em>.</li>
+            <li><span class="pill">programacion_id</span> en <span class="pill">boleto</span> (el campo se infiere del contexto).</li>
+          </ul>
+          <p class="note">Se preserva intención funcional; los identificadores se homogeneizan a snake_case.</p>
+        </details>
+
+        <h2>2) Pasos de modelado</h2>
+        <div class="step">
+          <h3>2.1 Geografía</h3>
+          <p>Definimos jerarquía 1–N: continente → país → departamento → ciudad. Las claves foráneas reflejan pertenencia administrativa.</p>
+        </div>
+        <div class="step">
+          <h3>2.2 Infraestructura</h3>
+          <p>Un aeropuerto pertenece a una ciudad. Cada aeropuerto tiene una o más terminales; cada terminal, varias puertas de embarque.</p>
+        </div>
+        <div class="step">
+          <h3>2.3 Flota</h3>
+          <p>La <strong>aeronave</strong> se instancia a partir de un <strong>tipo de aeronave</strong>; se controlan matrícula y horas de uso.</p>
+        </div>
+        <div class="step">
+          <h3>2.4 Personas</h3>
+          <p><strong>persona</strong> es el núcleo: de ella derivan <strong>empleado</strong> (rol, salario) y <strong>pasajero</strong>. Evitamos duplicidad de datos personales.</p>
+        </div>
+        <div class="step">
+          <h3>2.5 Operación</h3>
+          <p><strong>programacion</strong> define un vuelo: horas, tipo (nacional/internacional), origen/destino (puerta de embarque) y la aeronave asignada.</p>
+          <p><strong>tripulacion</strong> implementa relación N–N entre <em>empleado</em> y <em>programacion</em>.</p>
+          <p><strong>boleto</strong> vincula al pasajero (a través de <em>pasajero.boleto_id</em>) con una <em>programacion</em>. <strong>equipaje</strong> pertenece a un pasajero.</p>
+        </div>
+      </div>
+
+      <aside>
+        <h2>Leyenda</h2>
+        <div class="legend">
+          <div class="item"><span class="dot" style="background:#60a5fa"></span><span>Entidad</span></div>
+          <div class="item"><span class="dot" style="background:#34d399"></span><span>PK</span></div>
+          <div class="item"><span class="dot" style="background:#f59e0b"></span><span>FK</span></div>
+          <div class="item"><span class="dot" style="background:#a78bfa"></span><span>Relación 1–N</span></div>
+        </div>
+        <h2 style="margin-top:22px">Diagrama MER (SVG)</h2>
+        <div class="svg-wrap">
+          <object type="image/svg+xml" data="./mer-vuelos.svg" width="100%" style="min-height:600px">Tu navegador no puede mostrar el SVG. Ábrelo directamente.</object>
+        </div>
+        <p class="note">Las cardinalidades están anotadas cerca de cada extremo de las líneas (1 | N).</p>
+      </aside>
+    </section>
+
+    <section style="margin-top:26px">
+      <h2>3) Diccionario de datos (resumen)</h2>
+
+      <details>
+        <summary>Geografía</summary>
+        <table class="dict">
+          <thead><tr><th>Entidad</th><th>Atributos</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>continente</td><td><span class="pill">id (PK)</span>, nombre, descripcion</td><td></td></tr>
+            <tr><td>pais</td><td><span class="pill">id (PK)</span>, nombre, descripcion, <span class="pill">continente_id (FK)</span></td><td>1 país ∈ 1 continente</td></tr>
+            <tr><td>departamento</td><td><span class="pill">id (PK)</span>, nombre, descripcion, <span class="pill">pais_id (FK)</span></td><td></td></tr>
+            <tr><td>ciudad</td><td><span class="pill">id (PK)</span>, nombre, descripcion, <span class="pill">departamento_id (FK)</span></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>Infraestructura</summary>
+        <table class="dict">
+          <thead><tr><th>Entidad</th><th>Atributos</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>aeropuerto</td><td><span class="pill">id (PK)</span>, nombre, direccion, <span class="pill">ciudad_id (FK)</span></td><td></td></tr>
+            <tr><td>terminal</td><td><span class="pill">id (PK)</span>, codificacion, nombre, <span class="pill">aeropuerto_id (FK)</span></td><td></td></tr>
+            <tr><td>puerta_embarque</td><td><span class="pill">id (PK)</span>, codificacion, nombre, <span class="pill">terminal_id (FK)</span></td><td></td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>Flota</summary>
+        <table class="dict">
+          <thead><tr><th>Entidad</th><th>Atributos</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>tipo_aeronave</td><td><span class="pill">id (PK)</span>, codigo, nombre</td><td></td></tr>
+            <tr><td>aeronave</td><td><span class="pill">id (PK)</span>, fabricante, matricula, hora_uso, <span class="pill">tipo_aeronave_id (FK)</span></td><td>matricula única</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>Personas</summary>
+        <table class="dict">
+          <thead><tr><th>Entidad</th><th>Atributos</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>persona</td><td><span class="pill">id (PK)</span>, tipo_documento, numero_documento, nombre, apellido, fecha_nacimiento, correo, numero_celular</td><td>numero_documento único</td></tr>
+            <tr><td>empleado</td><td><span class="pill">id (PK)</span>, salario, rol, <span class="pill">persona_id (FK)</span></td><td>1–1 con persona</td></tr>
+            <tr><td>pasajero</td><td><span class="pill">id (PK)</span>, <span class="pill">persona_id (FK)</span>, <span class="pill">boleto_id (FK)</span></td><td>pasajero asociado a su boleto actual</td></tr>
+            <tr><td>equipaje</td><td><span class="pill">id (PK)</span>, codigo, <span class="pill">pasajero_id (FK)</span></td><td>codigo único por pieza</td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details>
+        <summary>Operación</summary>
+        <table class="dict">
+          <thead><tr><th>Entidad</th><th>Atributos</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>programacion</td><td><span class="pill">id (PK)</span>, fecha_vuelo, hora_salida, hora_llegada, tipo_vuelo, <span class="pill">origen_puerta_embarque_id (FK)</span>, <span class="pill">destino_puerta_embarque_id (FK)</span>, <span class="pill">aeronave_id (FK)</span></td><td>tipo_vuelo ∈ {NACIONAL, INTERNACIONAL}</td></tr>
+            <tr><td>tripulacion</td><td><span class="pill">id (PK)</span>, <span class="pill">empleado_id (FK)</span>, <span class="pill">programacion_id (FK)</span></td><td>resuelve N–N</td></tr>
+            <tr><td>boleto</td><td><span class="pill">id (PK)</span>, codigo, <span class="pill">programacion_id (FK)</span></td><td>codigo único</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <section style="margin-top:26px">
+      <h2>4) Reglas y cardinalidades clave</h2>
+      <ul>
+        <li>continente 1–N país; país 1–N departamento; departamento 1–N ciudad.</li>
+        <li>ciudad 1–N aeropuerto; aeropuerto 1–N terminal; terminal 1–N puerta_embarque.</li>
+        <li>tipo_aeronave 1–N aeronave.</li>
+        <li>persona 1–0..1 empleado; persona 1–0..N pasajero (según contexto de viajes).</li>
+        <li>programacion 1–N boleto; pasajero 1–N equipaje.</li>
+        <li>empleado N–N programacion vía tripulacion.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Elaborado automáticamente a partir de <span class="kbd">mer-vuelos.md</span>. SVG incluido para uso en presentaciones o documentación.
+    </footer>
+  </div>
+</body>
+</html>
