@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Management System – Proyecto</title>
+  <link rel="stylesheet" href="asset/css/estilos.css">
+  <script>
+    function openTab(evt, tabName, skipHash) {
+      var i, sections, buttons;
+      sections = document.querySelectorAll('section');
+      for (i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+      }
+      buttons = document.querySelectorAll('nav[role="tablist"] button');
+      for (i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+        buttons[i].setAttribute('aria-selected', 'false');
+      }
+      var targetSection = document.getElementById(tabName);
+      if (targetSection) targetSection.classList.add('active');
+      if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add('active');
+        evt.currentTarget.setAttribute('aria-selected', 'true');
+      }
+      if (!skipHash) {
+        try { location.hash = tabName; } catch (e) {}
+      }
+    }
+    function openSubTab(elmnt, contentId) {
+      var i, contents, buttons;
+      contents = document.getElementsByClassName('subcontent');
+      for (i = 0; i < contents.length; i++) {
+        contents[i].classList.remove('active');
+      }
+      buttons = elmnt.parentElement.querySelectorAll('button');
+      for (i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      document.getElementById(contentId).classList.add('active');
+      elmnt.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize tabs from hash
+      var initial = (location.hash || '').replace('#','') || 'presentation';
+      var initialBtn = document.querySelector("nav button[data-tab='"+initial+"']") || document.querySelector('nav button');
+      if (initialBtn) {
+        openTab({currentTarget: initialBtn}, initialBtn.getAttribute('data-tab') || 'presentation', true);
+      }
+
+      // Filter modules by search
+      var search = document.getElementById('moduleSearch');
+      if (search) {
+        var items = Array.prototype.slice.call(document.querySelectorAll('.modules-grid a.card'));
+        search.addEventListener('input', function(){
+          var q = (search.value || '').toLowerCase().trim();
+          items.forEach(function(el){
+            var text = el.textContent.toLowerCase();
+            el.style.display = text.indexOf(q) > -1 ? '' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+<header>
+  <h1>Flight Management System</h1>
+</header>
+<nav role="tablist" aria-label="Navegación de secciones">
+  <button role="tab" aria-controls="presentation" aria-selected="true" class="active" data-tab="presentation" onclick="openTab(event, 'presentation')">Presentación</button>
+  <button role="tab" aria-controls="diagrams" aria-selected="false" data-tab="diagrams" onclick="openTab(event, 'diagrams')">Diagramas</button>
+  <button role="tab" aria-controls="hu" aria-selected="false" data-tab="hu" onclick="openTab(event, 'hu')">Tablero HU</button>
+  <button role="tab" aria-controls="moscow" aria-selected="false" data-tab="moscow" onclick="openTab(event, 'moscow')">MoSCoW</button>
+  <button role="tab" aria-controls="phases" aria-selected="false" data-tab="phases" onclick="openTab(event, 'phases')">Fases & Estimación</button>
+</nav>
+<div class="module-nav" aria-label="Módulos del sistema">
+  <a href="geolocation/geolocation.html" class="nav-link">Geolocation</a>
+  <a href="infrastructure/infrastructure.html" class="nav-link">Infrastructure</a>
+  <a href="parameterization/parameterization.html" class="nav-link">Parameterization</a>
+  <a href="security/security.html" class="nav-link">Security</a>
+  <a href="human_resources/human_resources.html" class="nav-link">Human Resources</a>
+  <a href="aircraft_management/aircraft_management.html" class="nav-link">Aircraft Management</a>
+  <a href="flight_operations/flight_operations.html" class="nav-link">Flight Operations</a>
+  <a href="passengers_services/passengers_services.html" class="nav-link">Passengers & Services</a>
+  <a href="notifications/notifications.html" class="nav-link">Notifications</a>
+</div>
+<section id="presentation" class="active">
+  <div class="card" style="margin-top: 8px;">
+    <h2 style="margin-top:0">Presentación del Proyecto</h2>
+    <p>Este sistema gestiona todas las operaciones relacionadas con vuelos: desde la definición de aeropuertos, aviones y tripulación hasta la venta de tiquetes y la notificación de eventos. Incluye módulos para geolocalización, infraestructura, parametrización, seguridad, recursos humanos, gestión de aeronaves, operaciones de vuelo, servicios al pasajero y notificaciones.</p>
+    <div class="searchbar">
+      <input id="moduleSearch" type="search" placeholder="Buscar módulo por nombre..." aria-label="Buscar módulo">
+    </div>
+    <div class="modules-grid">
+      <a href='geolocation/geolocation.html' class="card">Geolocation</a>
+      <a href='infrastructure/infrastructure.html' class="card">Infrastructure</a>
+      <a href='parameterization/parameterization.html' class="card">Parameterization</a>
+      <a href='security/security.html' class="card">Security</a>
+      <a href='human_resources/human_resources.html' class="card">Human Resources</a>
+      <a href='aircraft_management/aircraft_management.html' class="card">Aircraft Management</a>
+      <a href='flight_operations/flight_operations.html' class="card">Flight Operations</a>
+      <a href='passengers_services/passengers_services.html' class="card">Passengers & Services</a>
+      <a href='notifications/notifications.html' class="card">Notifications</a>
+    </div>
+  </div>
+</section>
+<section id="diagrams">
+  <h2>Diagramas</h2>
+  <div class="subtabs">
+    <button class='active' onclick="openSubTab(this,'diagram-content-0')">Package Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-1')">Class Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-2')">Sequence Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-3')">Deployment Diagram</button><button class='' onclick="openSubTab(this,'diagram-content-4')">Use Case Diagram</button>
+  </div>
+  
+    <div id="diagram-content-0" class="subcontent active">
+      <h3>Package Diagram</h3>
+      <img src="asset/doc/proyecto/packeage/Packeage.png" alt="Package Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Flight Management System – Package Diagram
+
+package &quot;Geolocation&quot; {
+  class continent
+  class country
+  class state
+  class city
+}
+
+package &quot;Infrastructure&quot; {
+  class airport
+  class terminal
+  class boarding_gate
+}
+
+package &quot;Parameterization&quot; {
+  class document_type
+  class flight_type
+  class aircraft_type
+  class crew_role
+  class ticket_class
+}
+
+package &quot;Security&quot; {
+  class role
+  class module
+  class form
+  class form_module
+  class role_form
+  class person
+  class user_account
+}
+
+package &quot;Human Resources&quot; {
+  class employee
+}
+
+package &quot;Aircraft Management&quot; {
+  class aircraft
+}
+
+package &quot;Flight Operations&quot; {
+  class flight
+  class crew_assignment
+  class ticket
+  class baggage
+}
+
+package &quot;Passengers &amp; Services&quot; {
+  class passenger
+}
+
+package &quot;Notifications&quot; {
+  class message_template
+  class notification
+}
+
+@enduml
+</code></pre>
+    </div>
+    
+    <div id="diagram-content-1" class="subcontent ">
+      <h3>Class Diagram</h3>
+      <img src="asset/doc/proyecto/class/class.png" alt="Class Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Flight Management System – Class Diagram (IDs only)
+
+class continent {
+  + id
+}
+
+class country {
+  + id
+  + continent_id
+}
+
+class state {
+  + id
+  + country_id
+}
+
+class city {
+  + id
+  + state_id
+}
+
+class site {
+  + id
+  + city_id
+}
+
+class airport {
+  + id
+  + city_id
+}
+
+class terminal {
+  + id
+  + airport_id
+}
+
+class boarding_gate {
+  + id
+  + terminal_id
+}
+
+class document_type {
+  + id
+}
+
+class flight_type {
+  + id
+}
+
+class aircraft_type {
+  + id
+}
+
+class crew_role {
+  + id
+}
+
+class ticket_class {
+  + id
+}
+
+class role {
+  + id
+}
+
+class module {
+  + id
+}
+
+class form {
+  + id
+}
+
+class form_module {
+  + id
+  + form_id
+  + module_id
+}
+
+class role_form {
+  + id
+  + role_id
+  + form_id
+}
+
+class person {
+  + id
+  + document_type_id
+  + city_id
+}
+
+class user_account {
+  + id
+  + person_id
+  + role_id
+}
+
+class employee {
+  + id
+  + person_id
+  + crew_role_id
+}
+
+class aircraft {
+  + id
+  + aircraft_type_id
+}
+
+class flight {
+  + id
+  + flight_type_id
+  + origin_boarding_gate_id
+  + destination_boarding_gate_id
+  + aircraft_id
+}
+
+class crew_assignment {
+  + id
+  + flight_id
+  + employee_id
+  + crew_role_id
+}
+
+class passenger {
+  + id
+  + person_id
+}
+
+class ticket {
+  + id
+  + flight_id
+  + passenger_id
+  + ticket_class_id
+}
+
+class baggage {
+  + id
+  + ticket_id
+}
+
+class message_template {
+  + id
+}
+
+class notification {
+  + id
+  + person_id
+}
+
+&#x27; --- RELATIONSHIPS ---
+
+continent &quot;1&quot; *-- &quot;many&quot; country
+country &quot;1&quot; *-- &quot;many&quot; state
+state &quot;1&quot; *-- &quot;many&quot; city
+city &quot;1&quot; *-- &quot;many&quot; airport
+airport &quot;1&quot; *-- &quot;many&quot; terminal
+terminal &quot;1&quot; *-- &quot;many&quot; boarding_gate
+
+person &quot;1&quot; o-- &quot;many&quot; user_account
+person &quot;1&quot; o-- &quot;many&quot; passenger
+person &quot;1&quot; o-- &quot;many&quot; employee
+
+employee &quot;1&quot; o-- &quot;many&quot; crew_assignment
+flight &quot;1&quot; o-- &quot;many&quot; crew_assignment
+
+flight &quot;1&quot; o-- &quot;many&quot; ticket
+ticket &quot;1&quot; *-- &quot;many&quot; baggage
+
+role &quot;1&quot; o-- &quot;many&quot; role_form
+form &quot;1&quot; o-- &quot;many&quot; form_module
+module &quot;1&quot; o-- &quot;many&quot; form_module
+
+notification &quot;many&quot; --&gt; &quot;1&quot; person
+@enduml
+</code></pre>
+    </div>
+    
+    <div id="diagram-content-2" class="subcontent ">
+      <h3>Sequence Diagram</h3>
+      <img src="asset/doc/proyecto/secuence/Secuence.png" alt="Sequence Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Flight Booking – Sequence Diagram
+
+actor Passenger
+participant &quot;Security\n(Person)&quot; as Person
+participant &quot;Flight Operations\n(Flight)&quot; as Flight
+participant &quot;Flight Operations\n(Ticket)&quot; as Ticket
+participant &quot;Flight Operations\n(Baggage)&quot; as Baggage
+participant &quot;Notifications\n(Notification)&quot; as Notification
+
+Passenger -&gt; Person : Provide personal data
+Person --&gt; Passenger : Validate identity
+
+Passenger -&gt; Flight : Search available flight
+Flight --&gt; Passenger : Return flight details
+
+Passenger -&gt; Ticket : Request booking
+Ticket -&gt; Flight : Verify availability
+Flight --&gt; Ticket : Availability confirmed
+Ticket --&gt; Passenger : Ticket created
+
+Passenger -&gt; Baggage : Register baggage (optional)
+Baggage --&gt; Passenger : Baggage confirmed
+
+Ticket -&gt; Notification : Send booking confirmation
+Notification --&gt; Passenger : Confirmation message delivered
+
+@enduml
+</code></pre>
+    </div>
+    
+    <div id="diagram-content-3" class="subcontent ">
+      <h3>Deployment Diagram</h3>
+      <img src="asset/doc/proyecto/deploy/deploy.png" alt="Deployment Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>@startuml
+title Flight Management System – Deployment Diagram
+
+node &quot;AWS Cloud&quot; {
+  
+  node &quot;Container Cluster&quot; {
+    
+    node &quot;Frontend Container&quot; {
+      component &quot;Web App\nReact&quot; as Web
+      component &quot;Mobile App\nIonic React&quot; as Mobile
+    }
+    
+    node &quot;Backend Container&quot; {
+      component &quot;Spring Boot\nAPI&quot; as API
+    }
+    
+    node &quot;Database Container&quot; {
+      database &quot;PostgreSQL&quot; as DB
+    }
+    
+    API --&gt; DB : JDBC
+    Web --&gt; API : REST/HTTPS
+    Mobile --&gt; API : REST/HTTPS
+  }
+  
+  node &quot;CI/CD Pipeline&quot; {
+    component &quot;Jenkins&quot; as Jenkins
+    component &quot;GitHub Repo\nBranches: develop, qa, main&quot; as GitHub
+    GitHub --&gt; Jenkins : Webhook/Clone
+    Jenkins --&gt; &quot;Container Cluster&quot; : Build &amp; Deploy
+  }
+}
+
+@enduml
+</code></pre>
+    </div>
+    
+    <div id="diagram-content-4" class="subcontent ">
+      <h3>Use Case Diagram</h3>
+      <img src="asset/doc/proyecto/use_case/use_case.png" alt="Use Case Diagram" style="max-width:100%;height:auto; border:1px solid #e5e7eb;">
+      <h4>PlantUML Source</h4>
+      <pre><code>
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor #1f2937
+  ArrowColor #4b5563
+}
+skinparam ActorStyle awesome
+
+title Flight Management System – Use Case Diagram
+
+actor &quot;Passenger&quot; as Passenger
+actor &quot;Employee&quot; as Employee
+actor &quot;Admin&quot; as Admin
+actor &quot;Notification Service&quot; as Notifier
+
+package &quot;Passengers &amp; Services&quot; {
+  (Search Flight) as UC_Search
+  (Select Flight) as UC_Select
+  (Book Flight) as UC_Book
+  (Payment) as UC_Payment
+  (Check-in) as UC_Checkin
+  (Baggage Registration) as UC_Baggage
+}
+
+package &quot;Flight Operations&quot; {
+  (Schedule Flight) as UC_Schedule
+  (Assign Crew) as UC_Assign
+  (Validate Employee) as UC_Validate
+}
+
+package &quot;Security &amp; HR&quot; {
+  (Login) as UC_Login
+  (Manage Roles) as UC_Roles
+  (Manage User Accounts) as UC_Users
+  (Manage Employees) as UC_Employees
+}
+
+package &quot;Notifications&quot; {
+  (Send Notification) as UC_Notify
+  (Flight Delay Alert) as UC_Alert
+}
+
+&#x27; Relaciones de actores
+Passenger --&gt; UC_Search
+Passenger --&gt; UC_Book
+Passenger --&gt; UC_Checkin
+
+Employee --&gt; UC_Assign
+Employee --&gt; UC_Validate
+
+Admin --&gt; UC_Login
+Admin --&gt; UC_Roles
+Admin --&gt; UC_Users
+Admin --&gt; UC_Employees
+Admin --&gt; UC_Schedule
+
+Notifier --&gt; UC_Notify
+
+&#x27; Includes (reutilización)
+UC_Book ..&gt; UC_Select : &lt;&lt;include&gt;&gt;
+UC_Book ..&gt; UC_Payment : &lt;&lt;include&gt;&gt;
+UC_Assign ..&gt; UC_Validate : &lt;&lt;include&gt;&gt;
+
+&#x27; Extends (comportamiento opcional/condicional)
+UC_Checkin ..&gt; UC_Baggage : &lt;&lt;extend&gt;&gt;
+UC_Notify ..&gt; UC_Alert : &lt;&lt;extend&gt;&gt;
+
+legend right
+  == Leyenda ==
+  &lt;&lt;include&gt;&gt;: Reutiliza funcionalidad común
+  &lt;&lt;extend&gt;&gt;: Flujo opcional/condicional
+endlegend
+@enduml
+</code></pre>
+    </div>
+    
+</section>
+<section id="hu">
+  <h2>Tablero de Historias de Usuario (HU)</h2>
+  
+    <details>
+      <summary>Geolocation</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero gestionar continentes para administrar ubicaciones globales.</li><li>Como Administrador quiero asignar estados a países para organizar la información geográfica.</li><li>Como Administrador quiero agregar ciudades a estados para ubicar los aeropuertos correctamente.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Infrastructure</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero registrar aeropuertos para controlar puntos de origen y destino.</li><li>Como Administrador quiero definir terminales en cada aeropuerto para organizar embarque y desembarque.</li><li>Como Administrador quiero definir puertas de embarque para programar los vuelos de manera ordenada.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Parameterization</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero configurar tipos de documentos para capturar correctamente la documentación de las personas.</li><li>Como Administrador quiero administrar tipos de vuelos para clasificar los vuelos nacionales e internacionales.</li><li>Como Administrador quiero definir tipos de aeronaves para facilitar la gestión de la flota de aeronaves.</li><li>Como Administrador quiero definir roles de tripulación para asignar responsabilidades claramente.</li><li>Como Administrador quiero definir clases de tiquetes para ofrecer diferentes categorías de asientos.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Security</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero administrar roles y permisos de usuarios para controlar el acceso al sistema.</li><li>Como Administrador quiero registrar usuarios asociados a personas y roles para permitir el inicio de sesión de usuarios.</li><li>Como Usuario quiero iniciar sesión en el sistema para acceder a funcionalidades según su rol.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Human Resources</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero registrar empleados con sus datos y roles para gestionar tripulación y staff.</li><li>Como Administrador quiero consultar información de empleados para asignar tripulaciones eficientemente.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Aircraft Management</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero registrar aeronaves con sus tipos y horas de uso para controlar la flota.</li><li>Como Administrador quiero consultar la disponibilidad de aeronaves para planificar vuelos correctamente.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Flight Operations</summary>
+      <div>
+        <ul>
+          <li>Como Coordinador quiero programar vuelos con horarios, origen, destino y aeronave para cumplir con la programación de operaciones.</li><li>Como Coordinador quiero asignar tripulación a un vuelo para garantizar que el vuelo esté atendido.</li><li>Como Pasajero quiero comprar un ticket para reservar su asiento en un vuelo.</li><li>Como Pasajero quiero registrar su equipaje para asociar su equipaje con su ticket.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Passengers & Services</summary>
+      <div>
+        <ul>
+          <li>Como Pasajero quiero registrarse como cliente del sistema para comprar tickets y gestionar sus viajes.</li><li>Como Pasajero quiero acumular puntos de viajero frecuente para obtener beneficios y recompensas.</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details>
+      <summary>Notifications</summary>
+      <div>
+        <ul>
+          <li>Como Administrador quiero crear plantillas de mensajes para notificar eventos de manera uniforme.</li><li>Como Sistema quiero enviar notificaciones de confirmación de ticket para mantener informados a los pasajeros.</li><li>Como Sistema quiero enviar alertas de retraso de vuelo para informar oportunamente a pasajeros y tripulación.</li>
+        </ul>
+      </div>
+    </details>
+    
+</section>
+<section id="moscow">
+  <h2>Priorización MoSCoW</h2>
+  <h3>Must</h3><ul><li>Como Administrador quiero registrar aeropuertos para controlar puntos de origen y destino.</li><li>Como Administrador quiero definir terminales en cada aeropuerto para organizar embarque y desembarque.</li><li>Como Administrador quiero definir puertas de embarque para programar los vuelos de manera ordenada.</li><li>Como Administrador quiero administrar roles y permisos de usuarios para controlar el acceso al sistema.</li><li>Como Administrador quiero registrar usuarios asociados a personas y roles para permitir el inicio de sesión de usuarios.</li><li>Como Usuario quiero iniciar sesión en el sistema para acceder a funcionalidades según su rol.</li><li>Como Administrador quiero registrar aeronaves con sus tipos y horas de uso para controlar la flota.</li><li>Como Administrador quiero consultar la disponibilidad de aeronaves para planificar vuelos correctamente.</li><li>Como Coordinador quiero programar vuelos con horarios, origen, destino y aeronave para cumplir con la programación de operaciones.</li><li>Como Coordinador quiero asignar tripulación a un vuelo para garantizar que el vuelo esté atendido.</li><li>Como Pasajero quiero comprar un ticket para reservar su asiento en un vuelo.</li><li>Como Pasajero quiero registrar su equipaje para asociar su equipaje con su ticket.</li></ul><h3>Should</h3><ul><li>Como Administrador quiero gestionar continentes para administrar ubicaciones globales.</li><li>Como Administrador quiero asignar estados a países para organizar la información geográfica.</li><li>Como Administrador quiero agregar ciudades a estados para ubicar los aeropuertos correctamente.</li><li>Como Administrador quiero configurar tipos de documentos para capturar correctamente la documentación de las personas.</li><li>Como Administrador quiero administrar tipos de vuelos para clasificar los vuelos nacionales e internacionales.</li><li>Como Administrador quiero definir tipos de aeronaves para facilitar la gestión de la flota de aeronaves.</li><li>Como Administrador quiero definir roles de tripulación para asignar responsabilidades claramente.</li><li>Como Administrador quiero definir clases de tiquetes para ofrecer diferentes categorías de asientos.</li><li>Como Administrador quiero registrar empleados con sus datos y roles para gestionar tripulación y staff.</li><li>Como Administrador quiero consultar información de empleados para asignar tripulaciones eficientemente.</li></ul><h3>Could</h3><ul><li>Como Pasajero quiero registrarse como cliente del sistema para comprar tickets y gestionar sus viajes.</li><li>Como Pasajero quiero acumular puntos de viajero frecuente para obtener beneficios y recompensas.</li><li>Como Administrador quiero crear plantillas de mensajes para notificar eventos de manera uniforme.</li><li>Como Sistema quiero enviar notificaciones de confirmación de ticket para mantener informados a los pasajeros.</li><li>Como Sistema quiero enviar alertas de retraso de vuelo para informar oportunamente a pasajeros y tripulación.</li></ul><h3>Wont</h3><ul></ul>
+</section>
+<section id="phases">
+  <h2>Fases y Estimación</h2>
+  <table class="phase-table">
+    <thead><tr><th>Fase</th><th>Historias de Usuario</th><th>Estimación (hrs)</th><th>Avance (%)</th></tr></thead>
+    <tbody>
+    <tr><td>Phase 1</td><td><ul><li>Como Administrador quiero registrar aeropuertos para controlar puntos de origen y destino.</li><li>Como Administrador quiero definir terminales en cada aeropuerto para organizar embarque y desembarque.</li><li>Como Administrador quiero definir puertas de embarque para programar los vuelos de manera ordenada.</li><li>Como Administrador quiero administrar roles y permisos de usuarios para controlar el acceso al sistema.</li><li>Como Administrador quiero registrar usuarios asociados a personas y roles para permitir el inicio de sesión de usuarios.</li><li>Como Usuario quiero iniciar sesión en el sistema para acceder a funcionalidades según su rol.</li><li>Como Administrador quiero registrar aeronaves con sus tipos y horas de uso para controlar la flota.</li><li>Como Administrador quiero consultar la disponibilidad de aeronaves para planificar vuelos correctamente.</li><li>Como Coordinador quiero programar vuelos con horarios, origen, destino y aeronave para cumplir con la programación de operaciones.</li><li>Como Coordinador quiero asignar tripulación a un vuelo para garantizar que el vuelo esté atendido.</li><li>Como Pasajero quiero comprar un ticket para reservar su asiento en un vuelo.</li><li>Como Pasajero quiero registrar su equipaje para asociar su equipaje con su ticket.</li></ul></td><td></td><td></td></tr><tr><td>Phase 2</td><td><ul><li>Como Administrador quiero gestionar continentes para administrar ubicaciones globales.</li><li>Como Administrador quiero asignar estados a países para organizar la información geográfica.</li><li>Como Administrador quiero agregar ciudades a estados para ubicar los aeropuertos correctamente.</li><li>Como Administrador quiero configurar tipos de documentos para capturar correctamente la documentación de las personas.</li><li>Como Administrador quiero administrar tipos de vuelos para clasificar los vuelos nacionales e internacionales.</li><li>Como Administrador quiero definir tipos de aeronaves para facilitar la gestión de la flota de aeronaves.</li><li>Como Administrador quiero definir roles de tripulación para asignar responsabilidades claramente.</li><li>Como Administrador quiero definir clases de tiquetes para ofrecer diferentes categorías de asientos.</li><li>Como Administrador quiero registrar empleados con sus datos y roles para gestionar tripulación y staff.</li><li>Como Administrador quiero consultar información de empleados para asignar tripulaciones eficientemente.</li></ul></td><td></td><td></td></tr><tr><td>Phase 3</td><td><ul><li>Como Pasajero quiero registrarse como cliente del sistema para comprar tickets y gestionar sus viajes.</li><li>Como Pasajero quiero acumular puntos de viajero frecuente para obtener beneficios y recompensas.</li><li>Como Administrador quiero crear plantillas de mensajes para notificar eventos de manera uniforme.</li><li>Como Sistema quiero enviar notificaciones de confirmación de ticket para mantener informados a los pasajeros.</li><li>Como Sistema quiero enviar alertas de retraso de vuelo para informar oportunamente a pasajeros y tripulación.</li></ul></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+</body>
+</html>

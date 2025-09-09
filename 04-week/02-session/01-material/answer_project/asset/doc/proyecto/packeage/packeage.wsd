@@ -1,0 +1,59 @@
+@startuml
+title Flight Management System – Package Diagram
+
+package "Geolocation" {
+  class continent
+  class country
+  class state
+  class city
+}
+
+package "Infrastructure" {
+  class airport
+  class terminal
+  class boarding_gate
+}
+
+package "Parameterization" {
+  class document_type
+  class flight_type
+  class aircraft_type
+  class crew_role
+  class ticket_class
+}
+
+package "Security" {
+  class role
+  class module
+  class form
+  class form_module
+  class role_form
+  class person
+  class user_account
+}
+
+package "Human Resources" {
+  class employee
+}
+
+package "Aircraft Management" {
+  class aircraft
+}
+
+package "Flight Operations" {
+  class flight
+  class crew_assignment
+  class ticket
+  class baggage
+}
+
+package "Passengers & Services" {
+  class passenger
+}
+
+package "Notifications" {
+  class message_template
+  class notification
+}
+
+@enduml

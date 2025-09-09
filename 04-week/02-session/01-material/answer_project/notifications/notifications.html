@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications – Flight Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Notifications</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../geolocation/geolocation.html" class="nav-link">Geolocation</a>
+  <a href="../infrastructure/infrastructure.html" class="nav-link">Infrastructure</a>
+  <a href="../parameterization/parameterization.html" class="nav-link">Parameterization</a>
+  <a href="../security/security.html" class="nav-link">Security</a>
+  <a href="../human_resources/human_resources.html" class="nav-link">Human Resources</a>
+  <a href="../aircraft_management/aircraft_management.html" class="nav-link">Aircraft Management</a>
+  <a href="../flight_operations/flight_operations.html" class="nav-link">Flight Operations</a>
+  <a href="../passengers_services/passengers_services.html" class="nav-link">Passengers & Services</a>
+  <a href="notifications.html" class="nav-link active">Notifications</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Handles message templates and sending notifications for events.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>message_template</strong></td><td>id, code, name, subject_template, body_template</td></tr>
+      <tr><td><strong>notification</strong></td><td>id, person_id, channel, subject, message, sent_at, status</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security – Flight Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Security</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../geolocation/geolocation.html" class="nav-link">Geolocation</a>
+  <a href="../infrastructure/infrastructure.html" class="nav-link">Infrastructure</a>
+  <a href="../parameterization/parameterization.html" class="nav-link">Parameterization</a>
+  <a href="security.html" class="nav-link active">Security</a>
+  <a href="../human_resources/human_resources.html" class="nav-link">Human Resources</a>
+  <a href="../aircraft_management/aircraft_management.html" class="nav-link">Aircraft Management</a>
+  <a href="../flight_operations/flight_operations.html" class="nav-link">Flight Operations</a>
+  <a href="../passengers_services/passengers_services.html" class="nav-link">Passengers & Services</a>
+  <a href="../notifications/notifications.html" class="nav-link">Notifications</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Manages authentication, authorization and user-related data.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>role</strong></td><td>id, name, description</td></tr>
+      <tr><td><strong>module</strong></td><td>id, name, color, icon, path</td></tr>
+      <tr><td><strong>form</strong></td><td>id, name, color, icon, path, section</td></tr>
+      <tr><td><strong>form_module</strong></td><td>id, form_id, module_id</td></tr>
+      <tr><td><strong>role_form</strong></td><td>id, role_id, form_id</td></tr>
+      <tr><td><strong>person</strong></td><td>id, first_name, last_name, document_number, birth_date, gender, phone, email, address, attendant_name, attending_phone, document_type_id, city_id</td></tr>
+      <tr><td><strong>user_account</strong></td><td>id, username, password_hash, person_id, role_id</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

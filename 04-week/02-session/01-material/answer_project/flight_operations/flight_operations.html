@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Operations – Flight Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Flight Operations</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../geolocation/geolocation.html" class="nav-link">Geolocation</a>
+  <a href="../infrastructure/infrastructure.html" class="nav-link">Infrastructure</a>
+  <a href="../parameterization/parameterization.html" class="nav-link">Parameterization</a>
+  <a href="../security/security.html" class="nav-link">Security</a>
+  <a href="../human_resources/human_resources.html" class="nav-link">Human Resources</a>
+  <a href="../aircraft_management/aircraft_management.html" class="nav-link">Aircraft Management</a>
+  <a href="flight_operations.html" class="nav-link active">Flight Operations</a>
+  <a href="../passengers_services/passengers_services.html" class="nav-link">Passengers & Services</a>
+  <a href="../notifications/notifications.html" class="nav-link">Notifications</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Supports flight scheduling, crew assignments, ticketing and baggage management.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>flight</strong></td><td>id, flight_date, departure_time, arrival_time, flight_type_id, origin_boarding_gate_id, destination_boarding_gate_id, aircraft_id</td></tr>
+      <tr><td><strong>crew_assignment</strong></td><td>id, flight_id, employee_id, crew_role_id</td></tr>
+      <tr><td><strong>ticket</strong></td><td>id, code, flight_id, passenger_id, ticket_class_id, seat_number, price</td></tr>
+      <tr><td><strong>baggage</strong></td><td>id, code, weight, ticket_id</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>
