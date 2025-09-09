@@ -1,0 +1,85 @@
+package com.SENA.FlightManagementSystem.Flight.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.SENA.FlightManagementSystem.Flight.Entity.AFlightBaseEntity;
+import com.SENA.FlightManagementSystem.Flight.IService.IFlightBaseService;
+import com.SENA.FlightManagementSystem.Flight.Service.AFlightBaseService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.SENA.FlightManagementSystem.Infrastructure.DTO.ApiResponseDto;
+import com.SENA.FlightManagementSystem.Infrastructure.Entity.AInfrastructureBaseEntity;
+import com.SENA.FlightManagementSystem.Infrastructure.IService.IInfrastructureBaseService;
+
+/**
+ * Abstract base controller providing common CRUD endpoints for Infrastructure entities.
+ *
+ * @param <T> The type of entity extending AInfrastructureBaseEntity.
+ * @param <S> The type of service implementing IInfrastructureBaseService for the entity.
+ */
+public abstract class AFlightBaseController<T extends AFlightBaseEntity, S extends IFlightBaseService<T>> {
+
+    protected S service;
+    protected String entityName;
+
+    protected AFlightBaseController(S service, String entityName) {
+        this.service = service;
+        this.entityName = entityName;
+    }
+
+    @GetMapping
+    public ResponseEntity<ApiResponseDto<List<T>>> findByStateTrue() {
+        try {
+            return ResponseEntity.ok(new ApiResponseDto<List<T>>("Datos obtenidos", service.findByStateTrue(), true));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ApiResponseDto<List<T>>(e.getMessage(), null, false));
+        }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ApiResponseDto<Optional<T>>> show(@PathVariable String id) {
+        try {
+            Optional<T> entity = service.findById(id);
+            return ResponseEntity.ok(new ApiResponseDto<Optional<T>>("Registro encontrado", entity, true));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body(new ApiResponseDto<Optional<T>>(e.getMessage(), null, false));
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponseDto<T>> save(@RequestBody T entity) {
+        try {
+            return ResponseEntity.ok(new ApiResponseDto<T>("Datos guardados", service.save(entity), true));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ApiResponseDto<T>(e.getMessage(), null, false));
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ApiResponseDto<T>> update(@PathVariable String id, @RequestBody T entity) {
+        try {
+            service.update(id, entity);
+            return ResponseEntity.ok(new ApiResponseDto<T>("Datos actualizados", null, true));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ApiResponseDto<T>(e.getMessage(), null, false));
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<ApiResponseDto<T>> delete(@PathVariable String id) {
+        try {
+            service.delete(id);
+            return ResponseEntity.ok(new ApiResponseDto<T>("Registro eliminado", null, true));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ApiResponseDto<T>(e.getMessage(), null, false));
+        }
+    }
+}
