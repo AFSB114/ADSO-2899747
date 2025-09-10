@@ -2,6 +2,7 @@ package com.SENA.FlightManagementSystem.PassengersServices.Controller;
 
 import com.SENA.FlightManagementSystem.PassengersServices.Entity.Passenger;
 import com.SENA.FlightManagementSystem.PassengersServices.IService.IPassengersServicesPassengerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/passengers")
-public class PassengerControllerPassengersServices extends APassengersServicesBaseController<Passenger, IPassengersServicesPassengerService> {
+@Tag(name = "passengers_services")
+public class PassengerController extends APassengersServicesBaseController<Passenger, IPassengersServicesPassengerService> {
 
-    public PassengerControllerPassengersServices(IPassengersServicesPassengerService service) {
+    public PassengerController(IPassengersServicesPassengerService service) {
         super(service, "Passenger");
     }
 }

@@ -7,8 +7,9 @@ import lombok.Data;
 
 @Entity
 @Table(name = "passenger", schema = "passengers_services")
-@Schema(description = "Clase que representa un pasajero")
+@Schema(name = "passengers_services",description = "Clase que representa un pasajero")
 public class Passenger extends APassengersServicesBaseEntity {
+
 
     @Column(name = "frequent_flyer_number", nullable = false, unique = true)
     private String frequentFlyerNumber;

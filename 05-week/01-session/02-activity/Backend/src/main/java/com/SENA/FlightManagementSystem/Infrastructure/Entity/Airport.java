@@ -14,7 +14,7 @@ public class Airport extends AInfrastructureBaseEntity{
     private String address;
 
     @Schema(description = "Ciudad a la que pertenece el aeropuerto", example = "{\"id\":\"c123\",\"name\":\"Bogotá\"}")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "city_id", nullable = false)
     private City cityId;
 

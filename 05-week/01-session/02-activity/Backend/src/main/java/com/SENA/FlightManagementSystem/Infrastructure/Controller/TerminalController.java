@@ -2,6 +2,7 @@ package com.SENA.FlightManagementSystem.Infrastructure.Controller;
 
 import com.SENA.FlightManagementSystem.Infrastructure.Entity.Terminal;
 import com.SENA.FlightManagementSystem.Infrastructure.IService.ITerminalService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/Terminal")
+@Tag(name = "infrastructure")
 public class TerminalController extends AInfrastructureBaseController<Terminal, ITerminalService> {
 
     public TerminalController(ITerminalService service) {
