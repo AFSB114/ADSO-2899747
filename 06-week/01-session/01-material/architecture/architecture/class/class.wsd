@@ -1,0 +1,175 @@
+@startuml
+title Flight Management System – Class Diagram (IDs only)
+
+class continent {
+  + id
+}
+
+class country {
+  + id
+  + continent_id
+}
+
+class state {
+  + id
+  + country_id
+}
+
+class city {
+  + id
+  + state_id
+}
+
+class site {
+  + id
+  + city_id
+}
+
+class airport {
+  + id
+  + city_id
+}
+
+class terminal {
+  + id
+  + airport_id
+}
+
+class boarding_gate {
+  + id
+  + terminal_id
+}
+
+class document_type {
+  + id
+}
+
+class flight_type {
+  + id
+}
+
+class aircraft_type {
+  + id
+}
+
+class crew_role {
+  + id
+}
+
+class ticket_class {
+  + id
+}
+
+class role {
+  + id
+}
+
+class module {
+  + id
+}
+
+class form {
+  + id
+}
+
+class form_module {
+  + id
+  + form_id
+  + module_id
+}
+
+class role_form {
+  + id
+  + role_id
+  + form_id
+}
+
+class person {
+  + id
+  + document_type_id
+  + city_id
+}
+
+class user_account {
+  + id
+  + person_id
+  + role_id
+}
+
+class employee {
+  + id
+  + person_id
+  + crew_role_id
+}
+
+class aircraft {
+  + id
+  + aircraft_type_id
+}
+
+class flight {
+  + id
+  + flight_type_id
+  + origin_boarding_gate_id
+  + destination_boarding_gate_id
+  + aircraft_id
+}
+
+class crew_assignment {
+  + id
+  + flight_id
+  + employee_id
+  + crew_role_id
+}
+
+class passenger {
+  + id
+  + person_id
+}
+
+class ticket {
+  + id
+  + flight_id
+  + passenger_id
+  + ticket_class_id
+}
+
+class baggage {
+  + id
+  + ticket_id
+}
+
+class message_template {
+  + id
+}
+
+class notification {
+  + id
+  + person_id
+}
+
+' --- RELATIONSHIPS ---
+
+continent "1" *-- "many" country
+country "1" *-- "many" state
+state "1" *-- "many" city
+city "1" *-- "many" airport
+airport "1" *-- "many" terminal
+terminal "1" *-- "many" boarding_gate
+
+person "1" o-- "many" user_account
+person "1" o-- "many" passenger
+person "1" o-- "many" employee
+
+employee "1" o-- "many" crew_assignment
+flight "1" o-- "many" crew_assignment
+
+flight "1" o-- "many" ticket
+ticket "1" *-- "many" baggage
+
+role "1" o-- "many" role_form
+form "1" o-- "many" form_module
+module "1" o-- "many" form_module
+
+notification "many" --> "1" person
+@enduml

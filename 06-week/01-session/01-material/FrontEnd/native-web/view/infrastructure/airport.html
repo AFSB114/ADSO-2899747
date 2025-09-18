@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Aeropuertos - Native Web System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../../asset/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="bi bi-globe"></i>
+                Native Web System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Geolocalización
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../geolocation/continent.html">Continentes</a></li>
+                            <li><a class="dropdown-item" href="../geolocation/country.html">Países</a></li>
+                            <li><a class="dropdown-item" href="../geolocation/state.html">Estados</a></li>
+                            <li><a class="dropdown-item" href="../geolocation/city.html">Ciudades</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Infraestructura
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="airport.html">Aeropuertos</a></li>
+                            <li><a class="dropdown-item" href="terminal.html">Terminales</a></li>
+                            <li><a class="dropdown-item" href="boarding-gate.html">Puertas de Embarque</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb and Back Button -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="pt-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="../../index.html" class="text-decoration-none">
+                                <i class="bi bi-house me-1"></i>Inicio
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="../dashboard.html" class="text-decoration-none">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Infraestructura</li>
+                        <li class="breadcrumb-item active" aria-current="page">Aeropuertos</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+<!-- Premium Design Airport Management -->
+<div class="min-vh-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <!-- Main Container -->
+    <div class="container-fluid px-4 py-5">
+        <!-- Hero Header Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg bg-white bg-opacity-95">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-lg bg-gradient-primary d-flex align-items-center justify-content-center rounded-circle me-3 shadow">
+                                    <i class="bi bi-airplane text-white" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <div>
+                                    <h1 class="mb-0 text-dark fw-bold">Gestión de Aeropuertos</h1>
+                                    <p class="text-muted mb-0 mt-1">Administra aeropuertos y terminales globalmente</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="../dashboard.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                                    <i class="bi bi-arrow-left me-1"></i>Regresar al Dashboard
+                                </a>
+                                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                    <i class="bi bi-download me-1"></i>Exportar
+                                </button>
+                                <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3">
+                                    <i class="bi bi-arrow-clockwise me-1"></i>Actualizar
+                                </button>
+                                <button type="button" class="btn btn-outline-warning btn-sm rounded-pill px-3">
+                                    <i class="bi bi-map me-1"></i>Ver Mapa
+                                </button>
+                                <button type="button" class="btn btn-gradient-success btn-sm rounded-pill px-4 shadow-sm">
+                                    <i class="bi bi-plus-circle me-1"></i>Nuevo Aeropuerto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Statistics Cards -->
+        <div class="row mb-5 g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-airplane" style="font-size: 4rem; color: #28a745;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-success d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-airplane text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">15,847</h3>
+                            <p class="text-muted mb-0 small">Aeropuertos Globales</p>
+                            <div class="mt-2">
+                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1">
+                                    <i class="bi bi-arrow-up me-1"></i>+125 Este año
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-building" style="font-size: 4rem; color: #17a2b8;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-info d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-building text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">4,892</h3>
+                            <p class="text-muted mb-0 small">Terminales Activos</p>
+                            <div class="mt-2">
+                                <span class="badge bg-info bg-opacity-10 text-info rounded-pill px-3 py-1">
+                                    <i class="bi bi-check-circle me-1"></i>Operativos
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-people" style="font-size: 4rem; color: #ffc107;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-warning d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-people text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">4.5B</h3>
+                            <p class="text-muted mb-0 small">Pasajeros Anuales</p>
+                            <div class="mt-2">
+                                <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3 py-1">
+                                    <i class="bi bi-graph-up me-1"></i>Pre-pandemia
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-clock" style="font-size: 4rem; color: #dc3545;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-danger d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-clock text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">24/7</h3>
+                            <p class="text-muted mb-0 small">Operación Continua</p>
+                            <div class="mt-2">
+                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1">
+                                    <i class="bi bi-lightning me-1"></i>Activos
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Data Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-white py-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm bg-gradient-primary d-flex align-items-center justify-content-center rounded me-3">
+                                    <i class="bi bi-table text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Lista de Aeropuertos Premium</h5>
+                                    <p class="text-muted mb-0 small">Gestiona aeropuertos internacionales con diseño moderno</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="py-3 border-0 fw-semibold">Aeropuerto</th>
+                                        <th class="py-3 border-0 fw-semibold">Código IATA</th>
+                                        <th class="py-3 border-0 fw-semibold">Ciudad</th>
+                                        <th class="py-3 border-0 fw-semibold">Terminales</th>
+                                        <th class="py-3 border-0 fw-semibold">Pasajeros/Año</th>
+                                        <th class="py-3 border-0 fw-semibold text-end pe-4">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover-shadow">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm bg-gradient-success d-flex align-items-center justify-content-center rounded me-3">
+                                                    <i class="bi bi-airplane text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">El Dorado Internacional</h6>
+                                                    <small class="text-muted">Hub principal de Colombia</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill fw-bold">BOG</span></td>
+                                        <td><span class="fw-medium">Bogotá, Colombia</span></td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info rounded-pill">2 Terminales</span></td>
+                                        <td>
+                                            <span class="fw-medium">32.8M</span>
+                                            <small class="text-muted d-block">pasajeros</small>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">
+                                                <i class="bi bi-check-circle me-1"></i>Operativo
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%) !important;
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%) !important;
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%) !important;
+}
+
+.btn-gradient-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hover-lift-light:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.avatar-sm { width: 2rem; height: 2rem; }
+.avatar-md { width: 3rem; height: 3rem; }
+.avatar-lg { width: 4rem; height: 4rem; }
+</style>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small">Aeropuertos Activos</div>
+                            <div class="h4 mb-0">1,180</div>
+                        </div>
+                        <div class="ms-3">
+                            <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-warning text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small">Mayor Aeropuerto</div>
+                            <div class="h6 mb-0">ATL Atlanta</div>
+                        </div>
+                        <div class="ms-3">
+                            <i class="bi bi-building" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-danger text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="small">Terminales Totales</div>
+                            <div class="h4 mb-0">4,750</div>
+                        </div>
+                        <div class="ms-3">
+                            <i class="bi bi-buildings" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="bi bi-funnel me-2"></i>Filtros y Búsqueda
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control" id="searchAirports" placeholder="Buscar aeropuerto...">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="countryFilter">
+                        <option value="">Todos los países</option>
+                        <option value="colombia">Colombia</option>
+                        <option value="usa">Estados Unidos</option>
+                        <option value="spain">España</option>
+                        <option value="brazil">Brasil</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="statusFilter">
+                        <option value="">Todos los estados</option>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>
+                        <option value="maintenance">Mantenimiento</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="typeFilter">
+                        <option value="">Todos los tipos</option>
+                        <option value="international">Internacional</option>
+                        <option value="domestic">Nacional</option>
+                        <option value="regional">Regional</option>
+                        <option value="private">Privado</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="sortAirports">
+                        <option value="name">Ordenar por Nombre</option>
+                        <option value="code">Ordenar por Código</option>
+                        <option value="city">Ordenar por Ciudad</option>
+                        <option value="status">Ordenar por Estado</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <div class="d-grid">
+                        <button class="btn btn-outline-info" onclick="applyAirportFilters()">
+                            <i class="bi bi-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Airports Table -->
+    <div class="card shadow">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="bi bi-table me-2"></i>Lista de Aeropuertos
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Código IATA</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>País</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Terminales</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="airportsTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td><strong>BOG</strong></td>
+                            <td>Aeropuerto Internacional El Dorado</td>
+                            <td>Bogotá</td>
+                            <td>Colombia</td>
+                            <td><span class="badge bg-primary">Internacional</span></td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>2</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-info" onclick="viewAirport(1)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="editAirport(1)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="manageTerminals(1)">
+                                        <i class="bi bi-building"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteAirport(1)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>JFK</strong></td>
+                            <td>John F. Kennedy International Airport</td>
+                            <td>Nueva York</td>
+                            <td>Estados Unidos</td>
+                            <td><span class="badge bg-primary">Internacional</span></td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>6</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-info" onclick="viewAirport(2)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="editAirport(2)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="manageTerminals(2)">
+                                        <i class="bi bi-building"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteAirport(2)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>MAD</strong></td>
+                            <td>Aeropuerto Adolfo Suárez Madrid-Barajas</td>
+                            <td>Madrid</td>
+                            <td>España</td>
+                            <td><span class="badge bg-primary">Internacional</span></td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>4</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-info" onclick="viewAirport(3)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="editAirport(3)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="manageTerminals(3)">
+                                        <i class="bi bi-building"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteAirport(3)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>GRU</strong></td>
+                            <td>Aeroporto Internacional de São Paulo</td>
+                            <td>São Paulo</td>
+                            <td>Brasil</td>
+                            <td><span class="badge bg-primary">Internacional</span></td>
+                            <td><span class="badge bg-warning">Mantenimiento</span></td>
+                            <td>3</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-info" onclick="viewAirport(4)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="editAirport(4)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="manageTerminals(4)">
+                                        <i class="bi bi-building"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteAirport(4)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>MDE</strong></td>
+                            <td>Aeropuerto Internacional José María Córdova</td>
+                            <td>Medellín</td>
+                            <td>Colombia</td>
+                            <td><span class="badge bg-info">Nacional</span></td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>1</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-info" onclick="viewAirport(5)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="editAirport(5)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="manageTerminals(5)">
+                                        <i class="bi bi-building"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteAirport(5)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <nav aria-label="Airports pagination">
+                <ul class="pagination justify-content-center mt-3">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>
+
+<!-- Add/Edit Airport Modal -->
+<div class="modal fade" id="addAirportModal" tabindex="-1" aria-labelledby="addAirportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAirportModalLabel">
+                    <i class="bi bi-plus-circle me-2"></i>Nuevo Aeropuerto
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="airportForm">
+                    <input type="hidden" id="airportId">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="airportName" class="form-label">Nombre del Aeropuerto</label>
+                                <input type="text" class="form-control" id="airportName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="airportCode" class="form-label">Código IATA</label>
+                                <input type="text" class="form-control" id="airportCode" maxlength="3" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="airportIcao" class="form-label">Código ICAO</label>
+                                <input type="text" class="form-control" id="airportIcao" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="airportCity" class="form-label">Ciudad</label>
+                                <select class="form-select" id="airportCity" required>
+                                    <option value="">Seleccionar ciudad</option>
+                                    <!-- Cities will be loaded dynamically -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="airportType" class="form-label">Tipo</label>
+                                <select class="form-select" id="airportType" required>
+                                    <option value="">Seleccionar tipo</option>
+                                    <option value="international">Internacional</option>
+                                    <option value="domestic">Nacional</option>
+                                    <option value="regional">Regional</option>
+                                    <option value="private">Privado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="airportStatus" class="form-label">Estado</label>
+                                <select class="form-select" id="airportStatus" required>
+                                    <option value="">Seleccionar estado</option>
+                                    <option value="active">Activo</option>
+                                    <option value="inactive">Inactivo</option>
+                                    <option value="maintenance">Mantenimiento</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="airportDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="airportDescription" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-info" onclick="saveAirport()">
+                    <i class="bi bi-save me-1"></i>Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Airport management functions
+function exportAirports() {
+    console.log('Exporting airports...');
+    alert('Exportando datos de aeropuertos...');
+}
+
+function refreshAirports() {
+    console.log('Refreshing airports...');
+    alert('Actualizando datos de aeropuertos...');
+}
+
+function showAirportMap() {
+    console.log('Showing airports map...');
+    alert('Abriendo mapa de aeropuertos...');
+}
+
+function applyAirportFilters() {
+    console.log('Applying airport filters...');
+    alert('Aplicando filtros de aeropuertos...');
+}
+
+function viewAirport(id) {
+    console.log('Viewing airport:', id);
+    alert(`Viendo detalles del aeropuerto ${id}`);
+}
+
+function editAirport(id) {
+    console.log('Editing airport:', id);
+    document.getElementById('addAirportModalLabel').innerHTML = '<i class="bi bi-pencil me-2"></i>Editar Aeropuerto';
+    const modal = new bootstrap.Modal(document.getElementById('addAirportModal'));
+    modal.show();
+}
+
+function manageTerminals(id) {
+    console.log('Managing terminals for airport:', id);
+    alert(`Gestionando terminales del aeropuerto ${id}`);
+}
+
+function deleteAirport(id) {
+    if (confirm('¿Está seguro de que desea eliminar este aeropuerto?')) {
+        console.log('Deleting airport:', id);
+        alert(`Aeropuerto ${id} eliminado`);
+    }
+}
+
+function saveAirport() {
+    const form = document.getElementById('airportForm');
+    if (form.checkValidity()) {
+        console.log('Saving airport...');
+        bootstrap.Modal.getInstance(document.getElementById('addAirportModal')).hide();
+        alert('Aeropuerto guardado correctamente');
+    } else {
+        form.reportValidity();
+    }
+}
+
+// Search functionality
+document.getElementById('searchAirports')?.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#airportsTableBody tr');
+    
+    rows.forEach(row => {
+        const code = row.cells[1].textContent.toLowerCase();
+        const name = row.cells[2].textContent.toLowerCase();
+        const city = row.cells[3].textContent.toLowerCase();
+        
+        if (code.includes(searchTerm) || name.includes(searchTerm) || city.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+console.log('Airport management module loaded');
+</script>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Airport Service -->
+<script src="../../js/infrastructure/airport.js"></script>
+
+<!-- Common JS -->
+<script src="../../js/common.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configuración de librerías para Native Web System">
+    <title>Native Web System - Librerías</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="bi bi-gear-fill me-2"></i>
+                            Configuración de Librerías
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Librerías CSS</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Bootstrap CSS 5.3.3
+                                        <span class="badge bg-success">Cargado</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Bootstrap Icons 1.11.3
+                                        <span class="badge bg-success">Cargado</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Custom CSS (main.css)
+                                        <span class="badge bg-success">Cargado</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Librerías JavaScript</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Bootstrap JS 5.3.3
+                                        <span class="badge bg-success">Cargado</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Common.js (Utilidades)
+                                        <span class="badge bg-success">Cargado</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Pruebas de Funcionalidad</h5>
+                                
+                                <!-- Test Buttons -->
+                                <div class="mb-3">
+                                    <h6>Botones</h6>
+                                    <button type="button" class="btn btn-primary me-2">Primario</button>
+                                    <button type="button" class="btn btn-secondary me-2">Secundario</button>
+                                    <button type="button" class="btn btn-success me-2">Éxito</button>
+                                    <button type="button" class="btn btn-danger me-2">Peligro</button>
+                                    <button type="button" class="btn btn-warning me-2">Advertencia</button>
+                                    <button type="button" class="btn btn-info">Información</button>
+                                </div>
+                                
+                                <!-- Test Alerts -->
+                                <div class="mb-3">
+                                    <h6>Alertas</h6>
+                                    <div class="alert alert-primary" role="alert">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        Esta es una alerta de información primaria.
+                                    </div>
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        Esta es una alerta de éxito.
+                                    </div>
+                                </div>
+                                
+                                <!-- Test Form -->
+                                <div class="mb-3">
+                                    <h6>Formularios</h6>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Nombre</label>
+                                                <input type="text" class="form-control" placeholder="Ingresa tu nombre">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">País</label>
+                                                <select class="form-select">
+                                                    <option>Seleccionar país</option>
+                                                    <option>Colombia</option>
+                                                    <option>Estados Unidos</option>
+                                                    <option>México</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Test Badges -->
+                                <div class="mb-3">
+                                    <h6>Badges</h6>
+                                    <span class="badge bg-primary me-2">Primario</span>
+                                    <span class="badge bg-secondary me-2">Secundario</span>
+                                    <span class="badge bg-success me-2">Éxito</span>
+                                    <span class="badge bg-danger me-2">Peligro</span>
+                                    <span class="badge bg-warning text-dark me-2">Advertencia</span>
+                                    <span class="badge bg-info me-2">Información</span>
+                                </div>
+                                
+                                <!-- Test Progress Bars -->
+                                <div class="mb-3">
+                                    <h6>Barras de Progreso</h6>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar" style="width: 25%"></div>
+                                    </div>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-success" style="width: 50%"></div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Test Interactive Components -->
+                                <div class="mb-3">
+                                    <h6>Componentes Interactivos</h6>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testModal">
+                                            <i class="bi bi-window me-1"></i>
+                                            Abrir Modal
+                                        </button>
+                                        <button type="button" class="btn btn-success" onclick="showSuccess('¡Notificación de éxito!')">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Notificación Éxito
+                                        </button>
+                                        <button type="button" class="btn btn-danger" onclick="showError('Error de prueba')">
+                                            <i class="bi bi-exclamation-triangle me-1"></i>
+                                            Notificación Error
+                                        </button>
+                                        <button type="button" class="btn btn-warning" onclick="showWarning('Advertencia de prueba')">
+                                            <i class="bi bi-exclamation-circle me-1"></i>
+                                            Notificación Advertencia
+                                        </button>
+                                        <button type="button" class="btn btn-info" onclick="showInfo('Información de prueba')">
+                                            <i class="bi bi-info-circle me-1"></i>
+                                            Notificación Info
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" onclick="toggleLoading()">
+                                            <i class="bi bi-arrow-clockwise me-1"></i>
+                                            Toggle Loading
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <small>Native Web System - ADSO-2899747</small>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="themeToggle">
+                                    <i class="bi bi-sun-fill me-1"></i>
+                                    Cambiar Tema
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div class="modal fade" id="testModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-gear me-2"></i>
+                        Modal de Prueba
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Este es un modal de prueba para verificar que Bootstrap está funcionando correctamente.</p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        Las librerías están configuradas y funcionando correctamente.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Common JavaScript -->
+    <script src="../js/common.js"></script>
+
+    <!-- Test JavaScript -->
+    <script>
+        // Test Loading Toggle
+        let loadingActive = false;
+        function toggleLoading() {
+            loadingActive = !loadingActive;
+            showLoading(loadingActive);
+            
+            if (loadingActive) {
+                setTimeout(() => {
+                    loadingActive = false;
+                    showLoading(false);
+                    showSuccess('Carga completada');
+                }, 3000);
+            }
+        }
+
+        // Theme Toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = this.querySelector('i');
+            if (newTheme === 'dark') {
+                icon.className = 'bi bi-moon-fill me-1';
+                this.innerHTML = '<i class="bi bi-moon-fill me-1"></i>Tema Claro';
+            } else {
+                icon.className = 'bi bi-sun-fill me-1';
+                this.innerHTML = '<i class="bi bi-sun-fill me-1"></i>Cambiar Tema';
+            }
+            
+            showInfo(`Tema cambiado a ${newTheme === 'dark' ? 'oscuro' : 'claro'}`);
+        });
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                const themeToggle = document.getElementById('themeToggle');
+                themeToggle.innerHTML = '<i class="bi bi-moon-fill me-1"></i>Tema Claro';
+            }
+            
+            // Initialize tooltips
+            initializeTooltips();
+            
+            // Show initialization success
+            setTimeout(() => {
+                showSuccess('Librerías cargadas correctamente');
+            }, 500);
+        });
+
+        // Console log for debugging
+        console.log('Bootstrap version:', bootstrap.Tooltip.VERSION);
+        console.log('Native Web System - Libraries loaded successfully');
+    </script>
+</body>
+</html>

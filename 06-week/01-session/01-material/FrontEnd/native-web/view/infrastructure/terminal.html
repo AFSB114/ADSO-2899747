@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Meta tags esencial                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="../dashboard.html" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Dashboard
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="exportData()">
+                                <i class="bi bi-download"></i> Exportar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshData()">
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="showMap()">
+                                <i class="bi bi-map"></i> Ver Mapa
+                            </button>
+                        </div><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta tags -->
+    <meta name="description" content="Gestión de Terminales - Sistema de infraestructura aeroportuaria">
+    <meta name="keywords" content="terminales, aeropuertos, infraestructura, aviación">
+    <meta name="author" content="ADSO-2899747">
+    
+    <title>Terminales - Native Web System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../asset/img/favicon.ico">
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../../asset/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="bi bi-globe"></i>
+                Native Web System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="terminal.html">Terminales</a>
+                    </li>
+                </ul>
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="../dashboard.html" class="text-white-50">Dashboard</a></li>
+                        <li class="breadcrumb-item"><span class="text-white-50">Infraestructura</span></li>
+                        <li class="breadcrumb-item active text-white">Terminales</li>
+                    </ol>
+                </nav>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+        <div class="row">
+            <!-- Page Header -->
+            <div class="col-12">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="bi bi-buildings text-warning"></i>
+                        Gestión de Terminales
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="exportData()">
+                                <i class="bi bi-download"></i> Exportar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshData()">
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="showTerminalLayout()">
+                                <i class="bi bi-diagram-3"></i> Ver Layout
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#addTerminalModal">
+                            <i class="bi bi-plus-circle"></i> Nueva Terminal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Total Terminales</div>
+                                <div class="h5 mb-0" id="total-terminals">3,847</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-buildings" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Terminales Activas</div>
+                                <div class="h5 mb-0" id="active-terminals">3,542</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-check-circle" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-info text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Puertas Totales</div>
+                                <div class="h5 mb-0" id="total-gates">12,453</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-door-open" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-primary text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Aeropuertos</div>
+                                <div class="h5 mb-0" id="total-airports">1,250</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-airplane" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-funnel"></i>
+                    Filtros y Búsqueda
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" class="form-control" id="searchTerminal" placeholder="Buscar terminal...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="airportFilter">
+                            <option value="">Todos los aeropuertos</option>
+                            <!-- Airports will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="typeFilter">
+                            <option value="">Todos los tipos</option>
+                            <option value="passenger">Pasajeros</option>
+                            <option value="cargo">Carga</option>
+                            <option value="mixed">Mixta</option>
+                            <option value="international">Internacional</option>
+                            <option value="domestic">Doméstica</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="statusFilter">
+                            <option value="">Todos los estados</option>
+                            <option value="active">Activa</option>
+                            <option value="inactive">Inactiva</option>
+                            <option value="maintenance">Mantenimiento</option>
+                            <option value="renovation">Renovación</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="sortTerminal">
+                            <option value="id-asc">ID Ascendente</option>
+                            <option value="id-desc">ID Descendente</option>
+                            <option value="code-asc">Código A-Z</option>
+                            <option value="code-desc">Código Z-A</option>
+                            <option value="name-asc">Nombre A-Z</option>
+                            <option value="name-desc">Nombre Z-A</option>
+                            <option value="airport_id-asc">Aeropuerto A-Z</option>
+                            <option value="airport_id-desc">Aeropuerto Z-A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="showCapacity">
+                            <label class="form-check-label" for="showCapacity">
+                                Capacidad
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminals Table -->
+        <div class="card shadow">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-table"></i>
+                    Lista de Terminales
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="terminalsTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Aeropuerto</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="terminalsTableBody">
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Terminals pagination">
+                    <ul class="pagination justify-content-center mt-3" id="pagination">
+                        <!-- Pagination will be generated dynamically -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Terminal Modal -->
+    <div class="modal fade" id="addTerminalModal" tabindex="-1" aria-labelledby="addTerminalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTerminalModalLabel">
+                        <i class="bi bi-plus-circle"></i>
+                        Nueva Terminal
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="terminalForm">
+                        <input type="hidden" id="terminalId">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="terminalCode" class="form-label">Código</label>
+                                    <input type="text" class="form-control" id="terminalCode" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="terminalName" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="terminalName" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="terminalAirport" class="form-label">Aeropuerto</label>
+                                    <select class="form-select" id="terminalAirport" required>
+                                        <option value="">Seleccionar aeropuerto</option>
+                                        <!-- Airports will be loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="saveTerminal()">
+                        <i class="bi bi-save"></i>
+                        Guardar Terminal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Native Web System - Terminales</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ADSO-2899747</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="../../asset/library/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="../../js/infrastructure/terminal.js"></script>
+</body>
+</html>

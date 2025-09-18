@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Meta tags esenciales -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta tags -->
+    <meta name="description" content="Gestión de Ciudades - Sistema de geolocalización">
+    <meta name="keywords" content="ciudades, geolocalización, geografía, municipios">
+    <meta name="author" content="ADSO-2899747">
+    
+    <title>Ciudades - Native Web System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../asset/img/favicon.ico">
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../../asset/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="bi bi-globe"></i>
+                Native Web System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="city.html">Ciudades</a>
+                    </li>
+                </ul>
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="../dashboard.html" class="text-white-50">Dashboard</a></li>
+                        <li class="breadcrumb-item"><span class="text-white-50">Geolocalización</span></li>
+                        <li class="breadcrumb-item active text-white">Ciudades</li>
+                    </ol>
+                </nav>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container-fluid py-4">
+        <div class="row">
+            <!-- Page Header -->
+            <div class="col-12">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">
+                        <i class="bi bi-building text-warning"></i>
+                        Gestión de Ciudades
+                    </h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <a href="../dashboard.html" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Dashboard
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="exportData()">
+                                <i class="bi bi-download"></i> Exportar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshData()">
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="showMap()">
+                                <i class="bi bi-map"></i> Ver Mapa
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#addCityModal">
+                            <i class="bi bi-plus-circle"></i> Nueva Ciudad
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-warning text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Total Ciudades</div>
+                                <div class="h5 mb-0" id="total-cities">50,847</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-building" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Estados/Provincias</div>
+                                <div class="h5 mb-0" id="total-states">3,142</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-map" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-info text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Mayor Ciudad</div>
+                                <div class="h6 mb-0">Tokio</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-people" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small text-white-75">Aeropuertos</div>
+                                <div class="h5 mb-0" id="total-airports">1,250</div>
+                            </div>
+                            <div class="ms-3">
+                                <i class="bi bi-airplane" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-funnel"></i>
+                    Filtros y Búsqueda
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar ciudad...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="countryFilter">
+                            <option value="">Todos los países</option>
+                            <!-- Countries will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="stateFilter">
+                            <option value="">Todos los estados</option>
+                            <!-- States will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="populationFilter">
+                            <option value="">Todas las poblaciones</option>
+                            <option value="mega">Megaciudades (>10M)</option>
+                            <option value="large">Grandes (1M-10M)</option>
+                            <option value="medium">Medianas (100K-1M)</option>
+                            <option value="small">Pequeñas (<100K)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="sortSelect">
+                            <option value="name">Ordenar por Nombre</option>
+                            <option value="population">Ordenar por Población</option>
+                            <option value="country">Ordenar por País</option>
+                            <option value="state">Ordenar por Estado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="showCapitals">
+                            <label class="form-check-label" for="showCapitals">
+                                Capitales
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cities Table -->
+        <div class="card shadow">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-table"></i>
+                    Lista de Ciudades
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="citiesTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Estado/Provincia</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="citiesTableBody">
+                            <!-- Data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Cities pagination">
+                    <ul class="pagination justify-content-center mt-3" id="pagination">
+                        <!-- Pagination will be generated dynamically -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit City Modal -->
+    <div class="modal fade" id="addCityModal" tabindex="-1" aria-labelledby="addCityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCityModalLabel">
+                        <i class="bi bi-plus-circle"></i>
+                        Nueva Ciudad
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="cityForm">
+                        <input type="hidden" id="cityId">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="cityName" class="form-label">Nombre de la Ciudad</label>
+                                    <input type="text" class="form-control" id="cityName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="cityCode" class="form-label">Código</label>
+                                    <input type="text" class="form-control" id="cityCode" maxlength="10" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="cityState" class="form-label">Estado/Provincia</label>
+                                    <select class="form-select" id="cityState" required>
+                                        <option value="">Seleccionar estado/provincia</option>
+                                        <!-- States will be loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cityDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="cityDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="saveCity()">
+                        <i class="bi bi-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">
+                        <i class="bi bi-map"></i>
+                        Mapa de Ciudades
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cityMap" style="height: 500px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <div class="text-center">
+                                <i class="bi bi-map text-muted" style="font-size: 3rem;"></i>
+                                <p class="text-muted mt-2">Mapa interactivo de ciudades<br>
+                                <small>Se implementará con bibliotecas de mapas como Leaflet o Google Maps</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Native Web System - Ciudades</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">ADSO-2899747</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="../../asset/library/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="../../js/geolocation/city.js"></script>
+    
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCitiesData();
+            loadCountriesForFilter();
+            initializeEventListeners();
+        });
+
+        function initializeEventListeners() {
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', filterCities);
+            
+            // Filter functionality
+            document.getElementById('countryFilter').addEventListener('change', filterByCountry);
+            document.getElementById('stateFilter').addEventListener('change', filterByState);
+            document.getElementById('populationFilter').addEventListener('change', filterByPopulation);
+            
+            // Sort functionality
+            document.getElementById('sortSelect').addEventListener('change', sortCities);
+            
+            // Show capitals toggle
+            document.getElementById('showCapitals').addEventListener('change', filterCapitals);
+            
+            // Country change in form
+            document.getElementById('cityCountry').addEventListener('change', loadStatesForCountry);
+        }
+
+        function filterCities() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#citiesTableBody tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[1].textContent.toLowerCase();
+                const state = row.cells[2].textContent.toLowerCase();
+                const country = row.cells[3].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || state.includes(searchTerm) || country.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByCountry() {
+            console.log('Filtering by country...');
+        }
+
+        function filterByState() {
+            console.log('Filtering by state...');
+        }
+
+        function filterByPopulation() {
+            console.log('Filtering by population...');
+        }
+
+        function sortCities() {
+            console.log('Sorting cities...');
+        }
+
+        function filterCapitals() {
+            console.log('Filtering capitals...');
+        }
+
+        function showMap() {
+            const modal = new bootstrap.Modal(document.getElementById('mapModal'));
+            modal.show();
+        }
+
+        function exportData() {
+            alert('Exportando datos de ciudades...');
+        }
+
+        function refreshData() {
+            loadCitiesData();
+        }
+
+        function editCity(id) {
+            document.getElementById('addCityModalLabel').innerHTML = '<i class="bi bi-pencil"></i> Editar Ciudad';
+            const modal = new bootstrap.Modal(document.getElementById('addCityModal'));
+            modal.show();
+        }
+
+        function deleteCity(id) {
+            if (confirm('¿Está seguro de que desea eliminar esta ciudad?')) {
+                console.log('Deleting city with ID:', id);
+            }
+        }
+
+        function saveCity() {
+            const form = document.getElementById('cityForm');
+            if (form.checkValidity()) {
+                console.log('Saving city...');
+                bootstrap.Modal.getInstance(document.getElementById('addCityModal')).hide();
+            } else {
+                form.reportValidity();
+            }
+        }
+
+        function loadCitiesData() {
+            console.log('Loading cities data...');
+        }
+
+        function loadCountriesForFilter() {
+            console.log('Loading countries for filter...');
+        }
+
+        function loadStatesForCountry() {
+            console.log('Loading states for country...');
+        }
+    </script>
+</body>
+</html>

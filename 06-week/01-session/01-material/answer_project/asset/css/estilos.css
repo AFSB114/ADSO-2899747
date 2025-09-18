@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Main styles for Flight Management System project */
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f5f7fa 100%);
+  color: #1f2937;
+}
+
+/* Global links */
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:visited { color: #1d4ed8; }
+header {
+  padding: 32px 20px 20px 20px;
+  background: linear-gradient(90deg, #3b82f6 0%, #1f2937 100%);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.08);
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #374151;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.05);
+  justify-content: center;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+nav button {
+  background-color: #374151;
+  border: none;
+  color: #fff;
+  padding: 14px 28px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-bottom: -2px;
+  font-weight: 500;
+}
+nav button:hover,
+nav button.active {
+  background-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.08);
+}
+
+/* Anchor links inside nav (module navigation on all pages) */
+nav a.nav-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+nav a.nav-link:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+nav a.nav-link.active {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.18);
+}
+nav a.nav-link:visited { color: #e5e7eb; }
+
+/* Secondary, scrollable modules bar for index */
+.module-nav {
+  background: #1f2937;
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.05);
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+}
+.module-nav::-webkit-scrollbar {
+  height: 6px;
+}
+.module-nav::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 8px;
+}
+
+/* Links in module bar */
+.module-nav a.nav-link {
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 16px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.module-nav a.nav-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.module-nav a.nav-link.active { background: #2563eb; color: #fff; box-shadow: 0 2px 8px rgba(59,130,246,0.18); }
+.module-nav a.nav-link:visited { color: #e5e7eb; }
+section {
+  display: none;
+  padding: 32px 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+section.active {
+  display: block;
+}
+/* Sub tabs */
+/* Sub tabs */
+.subtabs {
+  display: flex;
+  border-bottom: 2px solid #e5e7eb;
+  margin-top: 10px;
+  gap: 4px;
+}
+.subtabs button {
+  background-color: #f3f4f6;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 8px 8px 0 0;
+  font-weight: 500;
+  transition: background 0.2s, border-bottom 0.2s;
+}
+.subtabs button.active {
+  background-color: #fff;
+  border-bottom: 3px solid #3b82f6;
+}
+.subcontent {
+  display: none;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.04);
+}
+.subcontent.active {
+  display: block;
+}
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.04);
+}
+/* Code blocks */
+pre {
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 16px;
+  border-radius: 10px;
+  overflow: auto;
+  border: 1px solid #1f2937;
+}
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }
+
+/* Images */
+img { max-width: 100%; height: auto; border-radius: 10px; }
+table th, table td {
+  border: 1px solid #d1d5db;
+  padding: 12px 10px;
+  text-align: left;
+}
+table th {
+  background-color: #e0e7ff;
+  color: #1e293b;
+  font-weight: 600;
+}
+table tr:nth-child(even) td {
+  background-color: #f3f4f6;
+}
+/* Collapsible sections for HU */
+details {
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.04);
+}
+details summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-weight: 600;
+  background-color: #f3f4f6;
+  border-radius: 8px 8px 0 0;
+}
+details div {
+  padding: 14px 28px;
+}
+/* Phase table */
+.phase-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(31,41,55,0.04);
+}
+.phase-table th,
+.phase-table td {
+  border: 1px solid #d1d5db;
+  padding: 12px 10px;
+}
+.phase-table th {
+  background-color: #e0e7ff;
+  color: #1e293b;
+  font-weight: 600;
+}
+.phase-table tr:nth-child(even) td {
+  background-color: #f3f4f6;
+}
+/* Card style for sections */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(31,41,55,0.08);
+  padding: 28px 24px;
+  margin-bottom: 24px;
+}
+
+/* Clickable card links */
+a.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  border: 1px solid #eef2ff;
+}
+a.card:visited { color: inherit; }
+a.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(31,41,55,0.12);
+  border-color: #c7d2fe;
+}
+
+/* Simple search */
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.searchbar input[type="search"] {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  outline: none;
+}
+.searchbar input[type="search"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* Responsive grid for modules */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+/* Headings spacing */
+h1, h2, h3 {
+  line-height: 1.2;
+}
+h2 { margin: 0 0 8px; }
+p { margin: 8px 0 16px; }
+
+/* Responsive design */
+@media (max-width: 700px) {
+  header {
+    font-size: 1.1rem;
+    padding: 18px 8px 12px 8px;
+  }
+  nav button {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  section {
+    padding: 18px 4px;
+  }
+  .subtabs button {
+    padding: 8px 10px;
+    font-size: 0.95rem;
+  }
+  .subcontent {
+    padding: 12px;
+  }
+  .card {
+    padding: 14px 8px;
+  }
+  table th, table td, .phase-table th, .phase-table td {
+    padding: 8px 4px;
+  }
+}

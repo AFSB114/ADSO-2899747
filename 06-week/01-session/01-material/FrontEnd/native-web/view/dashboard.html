@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Native Web System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../asset/css/main.css" rel="stylesheet">
+    
+    <!-- Dashboard Specific Styles -->
+    <style>
+        :root {
+            /* Primary Brand Colors */
+            --primary-color: #667eea;
+            --primary-dark: #5a67d8;
+            --primary-light: #e6fffa;
+            --secondary-color: #764ba2;
+            --success-color: #48bb78;
+            --danger-color: #f56565;
+            --warning-color: #ed8936;
+            --info-color: #4299e1;
+            --light-color: #f7fafc;
+            --dark-color: #2d3748;
+            
+            /* Gradient Combinations */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            --gradient-danger: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            --gradient-warning: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            --gradient-info: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            
+            /* Advanced Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gradient Background Classes */
+        .bg-gradient-primary {
+            background: var(--gradient-primary) !important;
+        }
+        
+        .bg-gradient-success {
+            background: var(--gradient-success) !important;
+        }
+        
+        .bg-gradient-danger {
+            background: var(--gradient-danger) !important;
+        }
+        
+        .bg-gradient-warning {
+            background: var(--gradient-warning) !important;
+        }
+        
+        .bg-gradient-info {
+            background: var(--gradient-info) !important;
+        }
+
+        /* Button Gradient Classes */
+        .btn-gradient-primary {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        
+        .btn-gradient-success {
+            background: var(--gradient-success);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72, 187, 120, 0.4);
+            color: white;
+        }
+
+        /* Hover Effects */
+        .hover-lift-light:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Enhanced Shadow Classes */
+        .shadow-lg {
+            box-shadow: var(--shadow-lg) !important;
+        }
+
+        /* Avatar System */
+        .avatar-lg {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .avatar-md {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .avatar-sm {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        /* Avatar Classes */
+        .avatar-lg {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+        
+        .avatar-md {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        /* Sidebar Enhancements */
+        .sidebar {
+            box-shadow: var(--shadow-lg);
+            border-right: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .sidebar .nav-link {
+            color: #6c757d;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            margin: 0.125rem 0.5rem;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Dashboard Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h5 class="text-primary fw-bold">Native Web System</h5>
+                    </div>
+                    
+                    <!-- Geolocation Section -->
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Geolocalización</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="geolocation/continent.html">
+                                <i class="bi bi-globe"></i> Continentes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="geolocation/country.html">
+                                <i class="bi bi-flag"></i> Países
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="geolocation/state.html">
+                                <i class="bi bi-map"></i> Estados
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="geolocation/city.html">
+                                <i class="bi bi-building"></i> Ciudades
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Infrastructure Section -->
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Infraestructura</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="infrastructure/airport.html">
+                                <i class="bi bi-airplane"></i> Aeropuertos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="infrastructure/terminal.html">
+                                <i class="bi bi-buildings"></i> Terminales
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="infrastructure/boarding-gate.html">
+                                <i class="bi bi-door-open"></i> Puertas de Embarque
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Dashboard Header -->
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard del Sistema</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshDashboard()">
+                            <i class="bi bi-arrow-clockwise"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Area -->
+                <div id="main-content">
+                    <!-- Dashboard Overview -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <h4 class="alert-heading">¡Bienvenido al Sistema Native Web!</h4>
+                                <p>Utiliza el menú lateral para navegar entre los diferentes módulos del sistema.</p>
+                                <hr>
+                                <p class="mb-0">Selecciona un módulo para comenzar a gestionar los datos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access Cards -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h5 class="mb-3">Acceso Rápido</h5>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card h-100 hover-lift-light">
+                                <div class="card-body text-center">
+                                    <div class="avatar-lg bg-gradient-primary d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3">
+                                        <i class="bi bi-globe text-white" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h6 class="card-title">Continentes</h6>
+                                    <p class="card-text text-muted small">Gestiona los continentes del mundo</p>
+                                    <a href="geolocation/continent.html" class="btn btn-gradient-primary btn-sm">
+                                        <i class="bi bi-arrow-right me-1"></i>Gestionar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card h-100 hover-lift-light">
+                                <div class="card-body text-center">
+                                    <div class="avatar-lg bg-gradient-success d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3">
+                                        <i class="bi bi-flag text-white" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h6 class="card-title">Países</h6>
+                                    <p class="card-text text-muted small">Administra países por continente</p>
+                                    <a href="geolocation/country.html" class="btn btn-gradient-success btn-sm">
+                                        <i class="bi bi-arrow-right me-1"></i>Gestionar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card h-100 hover-lift-light">
+                                <div class="card-body text-center">
+                                    <div class="avatar-lg bg-gradient-info d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3">
+                                        <i class="bi bi-airplane text-white" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h6 class="card-title">Aeropuertos</h6>
+                                    <p class="card-text text-muted small">Gestiona aeropuertos y terminales</p>
+                                    <a href="infrastructure/airport.html" class="btn btn-gradient-info btn-sm">
+                                        <i class="bi bi-arrow-right me-1"></i>Gestionar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card h-100 hover-lift-light">
+                                <div class="card-body text-center">
+                                    <div class="avatar-lg bg-gradient-warning d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3">
+                                        <i class="bi bi-buildings text-white" style="font-size: 1.5rem;"></i>
+                                    </div>
+                                    <h6 class="card-title">Terminales</h6>
+                                    <p class="card-text text-muted small">Administra terminales aeroportuarias</p>
+                                    <a href="infrastructure/terminal.html" class="btn btn-gradient-warning btn-sm">
+                                        <i class="bi bi-arrow-right me-1"></i>Gestionar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entity Statistics Cards -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card bg-primary text-white shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-white-75 text-uppercase mb-1">
+                                                Continentes
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold" id="continents-count">
+                                                <div class="spinner-border spinner-border-sm" role="status"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="bi bi-globe" style="font-size: 2rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card bg-success text-white shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-white-75 text-uppercase mb-1">
+                                                Países
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold" id="countries-count">
+                                                <div class="spinner-border spinner-border-sm" role="status"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="bi bi-flag" style="font-size: 2rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card bg-info text-white shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-white-75 text-uppercase mb-1">
+                                                Aeropuertos
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold" id="airports-count">
+                                                <div class="spinner-border spinner-border-sm" role="status"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="bi bi-airplane" style="font-size: 2rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card bg-warning text-white shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-white-75 text-uppercase mb-1">
+                                                Terminales
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold" id="terminals-count">
+                                                <div class="spinner-border spinner-border-sm" role="status"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="bi bi-buildings" style="font-size: 2rem;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Actividad Reciente del Sistema</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="recent-activity">
+                                        <p class="text-muted">Cargando actividad reciente...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
+    <!-- API Services -->
+    <script src="../js/common.js"></script>
+    <script src="../js/geolocation/continent.js"></script>
+    <script src="../js/geolocation/country.js"></script>
+    <script src="../js/geolocation/state-new.js"></script>
+    <script src="../js/geolocation/city-new.js"></script>
+    <script src="../js/infrastructure/airport.js"></script>
+    <script src="../js/infrastructure/terminal.js"></script>
+    <script src="../js/infrastructure/boarding-gate-new.js"></script>
+    
+    <script>
+        // Dashboard Management
+        class Dashboard {
+            constructor() {
+                this.currentModule = null;
+                this.init();
+            }
+
+            async init() {
+                this.loadEntityCounts();
+                this.loadRecentActivity();
+            }
+
+            /**
+             * Load entity counts from API
+             */
+            async loadEntityCounts() {
+                try {
+                    // Load continents count
+                    const continents = await continentService.getAll();
+                    document.getElementById('continents-count').textContent = continents.length || 0;
+                } catch (error) {
+                    document.getElementById('continents-count').textContent = 'Error';
+                }
+
+                try {
+                    // Load countries count
+                    const countries = await countryService.getAll();
+                    document.getElementById('countries-count').textContent = countries.length || 0;
+                } catch (error) {
+                    document.getElementById('countries-count').textContent = 'Error';
+                }
+
+                try {
+                    // Load airports count
+                    const airports = await airportService.getAll();
+                    document.getElementById('airports-count').textContent = airports.length || 0;
+                } catch (error) {
+                    document.getElementById('airports-count').textContent = 'Error';
+                }
+
+                try {
+                    // Load terminals count
+                    const terminals = await terminalService.getAll();
+                    document.getElementById('terminals-count').textContent = terminals.length || 0;
+                } catch (error) {
+                    document.getElementById('terminals-count').textContent = 'Error';
+                }
+            }
+
+            /**
+             * Load recent activity from API
+             */
+            async loadRecentActivity() {
+                const activityElement = document.getElementById('recent-activity');
+                try {
+                    // This would be a real API call
+                    // const activity = await apiService.get('/activity/recent');
+                    
+                    activityElement.innerHTML = `
+                        <div class="alert alert-light">
+                            <small class="text-muted">
+                                La actividad reciente se mostrará aquí cuando se conecte con la API del backend.
+                            </small>
+                        </div>
+                    `;
+                } catch (error) {
+                    activityElement.innerHTML = `
+                        <div class="alert alert-warning">
+                            <small>No se pudo cargar la actividad reciente.</small>
+                        </div>
+                    `;
+                }
+            }
+
+            /**
+             * Load a specific module
+             */
+            async loadModule(moduleName) {
+                const mainContent = document.getElementById('main-content');
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                event.target.classList.add('active');
+
+                try {
+                    mainContent.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+                    
+                    let url;
+                    switch(moduleName) {
+                        case 'continent':
+                            url = 'geolocation/continent.html';
+                            break;
+                        case 'country':
+                            url = 'geolocation/country.html';
+                            break;
+                        case 'state':
+                            url = 'geolocation/state.html';
+                            break;
+                        case 'city':
+                            url = 'geolocation/city.html';
+                            break;
+                        case 'airport':
+                            url = 'infrastructure/airport.html';
+                            break;
+                        case 'terminal':
+                            url = 'infrastructure/terminal.html';
+                            break;
+                        case 'boarding-gate':
+                            url = 'infrastructure/boarding-gate.html';
+                            break;
+                        default:
+                            throw new Error('Módulo no encontrado');
+                    }
+
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const html = await response.text();
+                    
+                    // Create a container that inherits the dashboard styles
+                    const moduleContainer = document.createElement('div');
+                    moduleContainer.className = 'module-content position-relative';
+                    moduleContainer.innerHTML = html;
+                    
+                    // Clear main content and append the styled module
+                    mainContent.innerHTML = '';
+                    mainContent.appendChild(moduleContainer);
+                    
+                    // Ensure CSS classes are properly applied
+                    this.applyGlobalStyles(moduleContainer);
+                    
+                    // Initialize any module-specific JavaScript if needed
+                    this.initializeModuleScripts(moduleName);
+                    
+                    this.currentModule = moduleName;
+                    
+                } catch (error) {
+                    console.error('Error loading module:', error);
+                    mainContent.innerHTML = `
+                        <div class="alert alert-danger shadow-lg">
+                            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle me-2"></i>Error al cargar el módulo</h4>
+                            <p>No se pudo cargar el módulo "${moduleName}". Verifica que el archivo existe y la API está disponible.</p>
+                            <hr>
+                            <p class="mb-0"><small>Error: ${error.message}</small></p>
+                        </div>
+                    `;
+                }
+            }
+
+            /**
+             * Apply global styles to loaded module content
+             */
+            applyGlobalStyles(container) {
+                // Ensure Bootstrap classes are working
+                container.classList.add('bootstrap-enabled');
+                
+                // Apply custom CSS inheritance
+                const style = document.createElement('style');
+                style.textContent = `
+                    .module-content {
+                        font-family: inherit;
+                        color: inherit;
+                        width: 100%;
+                        min-height: 100vh;
+                    }
+                    
+                    .module-content .btn-gradient-primary {
+                        background: var(--gradient-primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+                        border: none;
+                        color: white;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .module-content .btn-gradient-primary:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+                        color: white;
+                    }
+                    
+                    .module-content .btn-gradient-success {
+                        background: var(--gradient-success, linear-gradient(135deg, #48bb78 0%, #38a169 100%));
+                        border: none;
+                        color: white;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .module-content .btn-gradient-success:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 10px 20px rgba(72, 187, 120, 0.4);
+                        color: white;
+                    }
+                    
+                    .module-content .btn-gradient-danger {
+                        background: var(--gradient-danger, linear-gradient(135deg, #f56565 0%, #e53e3e 100%));
+                        border: none;
+                        color: white;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .module-content .btn-gradient-warning {
+                        background: var(--gradient-warning, linear-gradient(135deg, #ed8936 0%, #dd6b20 100%));
+                        border: none;
+                        color: white;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .module-content .btn-gradient-info {
+                        background: var(--gradient-info, linear-gradient(135deg, #4299e1 0%, #3182ce 100%));
+                        border: none;
+                        color: white;
+                        transition: all 0.3s ease;
+                    }
+                    
+                    .module-content .bg-gradient-primary {
+                        background: var(--gradient-primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%)) !important;
+                    }
+                    
+                    .module-content .bg-gradient-success {
+                        background: var(--gradient-success, linear-gradient(135deg, #48bb78 0%, #38a169 100%)) !important;
+                    }
+                    
+                    .module-content .bg-gradient-danger {
+                        background: var(--gradient-danger, linear-gradient(135deg, #f56565 0%, #e53e3e 100%)) !important;
+                    }
+                    
+                    .module-content .bg-gradient-warning {
+                        background: var(--gradient-warning, linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)) !important;
+                    }
+                    
+                    .module-content .bg-gradient-info {
+                        background: var(--gradient-info, linear-gradient(135deg, #4299e1 0%, #3182ce 100%)) !important;
+                    }
+                    
+                    .module-content .hover-lift-light:hover {
+                        transform: translateY(-5px);
+                        transition: transform 0.3s ease;
+                    }
+                    
+                    .module-content .shadow-lg {
+                        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+                    }
+                    
+                    .module-content .avatar-lg {
+                        width: 3.5rem;
+                        height: 3.5rem;
+                    }
+                    
+                    .module-content .avatar-md {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
+                    
+                    .module-content .backdrop-blur {
+                        backdrop-filter: blur(10px);
+                        -webkit-backdrop-filter: blur(10px);
+                    }
+                    
+                    .module-content .bg-opacity-95 {
+                        background-color: rgba(255, 255, 255, 0.95) !important;
+                    }
+                `;
+                
+                // Only add the style if it doesn't exist
+                if (!document.querySelector('style[data-module-styles]')) {
+                    style.setAttribute('data-module-styles', 'true');
+                    document.head.appendChild(style);
+                }
+            }
+
+            /**
+             * Initialize module-specific scripts
+             */
+            initializeModuleScripts(moduleName) {
+                // Initialize any specific JavaScript for the loaded module
+                switch(moduleName) {
+                    case 'continent':
+                        if (typeof continentService !== 'undefined') {
+                            console.log('Continent service available');
+                        }
+                        break;
+                    case 'country':
+                        if (typeof countryService !== 'undefined') {
+                            console.log('Country service available');
+                        }
+                        break;
+                    case 'airport':
+                        if (typeof airportService !== 'undefined') {
+                            console.log('Airport service available');
+                        }
+                        break;
+                    case 'terminal':
+                        if (typeof terminalService !== 'undefined') {
+                            console.log('Terminal service available');
+                        }
+                        break;
+                }
+            }
+        }
+
+        // Global functions
+        function loadModule(moduleName) {
+            dashboard.loadModule(moduleName);
+        }
+
+        function refreshDashboard() {
+            dashboard.loadEntityCounts();
+            dashboard.loadRecentActivity();
+        }
+
+        // Initialize dashboard when page loads
+        let dashboard;
+        document.addEventListener('DOMContentLoaded', function() {
+            dashboard = new Dashboard();
+        });
+    </script>
+</body>
+</html>

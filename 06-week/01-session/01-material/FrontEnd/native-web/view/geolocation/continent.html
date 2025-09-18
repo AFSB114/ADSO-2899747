@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Continentes - Native Web System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../../asset/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="bi bi-globe"></i>
+                Native Web System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Geolocalización
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="continent.html">Continentes</a></li>
+                            <li><a class="dropdown-item" href="country.html">Países</a></li>
+                            <li><a class="dropdown-item" href="state.html">Estados</a></li>
+                            <li><a class="dropdown-item" href="city.html">Ciudades</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Infraestructura
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../infrastructure/airport.html">Aeropuertos</a></li>
+                            <li><a class="dropdown-item" href="../infrastructure/terminal.html">Terminales</a></li>
+                            <li><a class="dropdown-item" href="../infrastructure/boarding-gate.html">Puertas de Embarque</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb and Back Button -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="pt-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="../../index.html" class="text-decoration-none">
+                                <i class="bi bi-house me-1"></i>Inicio
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="../dashboard.html" class="text-decoration-none">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Geolocalización</li>
+                        <li class="breadcrumb-item active" aria-current="page">Continentes</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+<!-- Continent Management CRUD Interface -->
+<div class="container-fluid p-4">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-lg bg-gradient-primary d-flex align-items-center justify-content-center rounded-circle me-3 shadow">
+                                <i class="bi bi-globe text-white" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <h1 class="mb-0 text-dark fw-bold">Gestión de Continentes</h1>
+                                <p class="text-muted mb-0 mt-1">Administra los continentes del mundo</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a href="../dashboard.html" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                                <i class="bi bi-arrow-left me-1"></i>Regresar al Dashboard
+                            </a>
+                            <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3" onclick="refreshContinentData()">
+                                <i class="bi bi-arrow-clockwise me-1"></i>Actualizar
+                            </button>
+                            <button type="button" class="btn btn-gradient-success btn-sm rounded-pill px-4 shadow-sm" onclick="showCreateContinentModal()">
+                                <i class="bi bi-plus-circle me-1"></i>Nuevo Continente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-table me-2"></i>Lista de Continentes</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table id="continentsTable" class="table table-striped table-hover" style="width:100%">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Países</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be loaded via DataTables -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create/Edit Continent Modal -->
+<div class="modal fade" id="continentModal" tabindex="-1" aria-labelledby="continentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title" id="continentModalLabel">
+                    <i class="bi bi-globe me-2"></i>Nuevo Continente
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="continentForm">
+                    <input type="hidden" id="continentId">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="continentCode" class="form-label fw-bold">
+                                <i class="bi bi-tag me-1"></i>Código *
+                            </label>
+                            <input type="text" class="form-control" id="continentCode" name="code" required maxlength="10">
+                            <div class="form-text">Código único del continente (ej: AF, AS, EU)</div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="continentName" class="form-label fw-bold">
+                                <i class="bi bi-type me-1"></i>Nombre *
+                            </label>
+                            <input type="text" class="form-control" id="continentName" name="name" required maxlength="100">
+                            <div class="form-text">Nombre completo del continente</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="continentDescription" class="form-label fw-bold">
+                            <i class="bi bi-text-paragraph me-1"></i>Descripción
+                        </label>
+                        <textarea class="form-control" id="continentDescription" name="description" rows="3" maxlength="500"></textarea>
+                        <div class="form-text">Descripción opcional del continente</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-gradient-success" onclick="saveContinentData()">
+                    <i class="bi bi-check-circle me-1"></i>Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteContinentModal" tabindex="-1" aria-labelledby="deleteContinentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-danger text-white">
+                <h5 class="modal-title" id="deleteContinentModalLabel">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el continente <strong id="deleteContinentName"></strong>?</p>
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Esta acción no se puede deshacer y puede afectar los países asociados.
+                </div>
+                <input type="hidden" id="deleteContinentId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-gradient-danger" onclick="confirmDeleteContinent()">
+                    <i class="bi bi-trash me-1"></i>Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Continent Management JavaScript
+class ContinentManager {
+    constructor() {
+        this.dataTable = null;
+        this.currentContinentId = null;
+        this.init();
+    }
+
+    async init() {
+        this.initDataTable();
+        await this.loadContinentData();
+    }
+
+    initDataTable() {
+        this.dataTable = $('#continentsTable').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+            },
+            responsive: true,
+            pageLength: 10,
+            order: [[1, 'asc']], // Order by code
+            columnDefs: [
+                {
+                    targets: 5, // Actions column
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                        return `
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="continentManager.editContinent(${row[0]})" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-info btn-sm" onclick="continentManager.viewCountries(${row[0]})" title="Ver Países">
+                                    <i class="bi bi-flag"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="continentManager.showDeleteModal(${row[0]}, '${row[2]}')" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                    }
+                },
+                {
+                    targets: 4, // Countries column
+                    render: function(data, type, row) {
+                        return `<span class="badge bg-info">${data || 0} países</span>`;
+                    }
+                }
+            ]
+        });
+    }
+
+    async loadContinentData() {
+        try {
+            const continents = await continentService.getAll();
+            
+            // Clear existing data
+            this.dataTable.clear();
+            
+            // Process data for DataTable
+            const tableData = await Promise.all(continents.map(async (continent) => {
+                let countriesCount = 0;
+                try {
+                    const countries = await continentService.getCountries(continent.id);
+                    countriesCount = countries.length;
+                } catch (error) {
+                    console.warn(`Could not load countries for continent ${continent.id}`);
+                }
+                
+                return [
+                    continent.id,
+                    continent.code,
+                    continent.name,
+                    continent.description || '-',
+                    countriesCount
+                ];
+            }));
+            
+            // Add data to table
+            this.dataTable.rows.add(tableData).draw();
+            
+        } catch (error) {
+            console.error('Error loading continent data:', error);
+            this.showAlert('Error al cargar los datos de continentes', 'danger');
+        }
+    }
+
+    showCreateModal() {
+        this.resetForm();
+        document.getElementById('continentModalLabel').innerHTML = '<i class="bi bi-globe me-2"></i>Nuevo Continente';
+        const modal = new bootstrap.Modal(document.getElementById('continentModal'));
+        modal.show();
+    }
+
+    async editContinent(continentId) {
+        try {
+            const continent = await continentService.getById(continentId);
+            
+            this.currentContinentId = continentId;
+            document.getElementById('continentId').value = continentId;
+            document.getElementById('continentCode').value = continent.code;
+            document.getElementById('continentName').value = continent.name;
+            document.getElementById('continentDescription').value = continent.description || '';
+            
+            document.getElementById('continentModalLabel').innerHTML = '<i class="bi bi-pencil me-2"></i>Editar Continente';
+            
+            const modal = new bootstrap.Modal(document.getElementById('continentModal'));
+            modal.show();
+            
+        } catch (error) {
+            console.error('Error loading continent for edit:', error);
+            this.showAlert('Error al cargar los datos del continente', 'danger');
+        }
+    }
+
+    async saveContinentData() {
+        try {
+            const formData = new FormData(document.getElementById('continentForm'));
+            const continentData = {
+                code: formData.get('code').trim(),
+                name: formData.get('name').trim(),
+                description: formData.get('description').trim()
+            };
+
+            if (this.currentContinentId) {
+                // Update existing continent
+                await continentService.update(this.currentContinentId, continentData);
+                this.showAlert('Continente actualizado correctamente', 'success');
+            } else {
+                // Create new continent
+                await continentService.create(continentData);
+                this.showAlert('Continente creado correctamente', 'success');
+            }
+
+            // Close modal and refresh data
+            bootstrap.Modal.getInstance(document.getElementById('continentModal')).hide();
+            await this.loadContinentData();
+
+        } catch (error) {
+            console.error('Error saving continent:', error);
+            this.showAlert(error.message || 'Error al guardar el continente', 'danger');
+        }
+    }
+
+    showDeleteModal(continentId, continentName) {
+        document.getElementById('deleteContinentId').value = continentId;
+        document.getElementById('deleteContinentName').textContent = continentName;
+        
+        const modal = new bootstrap.Modal(document.getElementById('deleteContinentModal'));
+        modal.show();
+    }
+
+    async confirmDeleteContinent() {
+        try {
+            const continentId = document.getElementById('deleteContinentId').value;
+            await continentService.delete(continentId);
+            
+            bootstrap.Modal.getInstance(document.getElementById('deleteContinentModal')).hide();
+            this.showAlert('Continente eliminado correctamente', 'success');
+            await this.loadContinentData();
+            
+        } catch (error) {
+            console.error('Error deleting continent:', error);
+            this.showAlert(error.message || 'Error al eliminar el continente', 'danger');
+        }
+    }
+
+    async viewCountries(continentId) {
+        // This would navigate to countries view with continent filter
+        // For now, show an alert
+        try {
+            const countries = await continentService.getCountries(continentId);
+            const continent = await continentService.getById(continentId);
+            
+            let message = `Países en ${continent.name}:\n`;
+            if (countries.length > 0) {
+                message += countries.map(country => `• ${country.name} (${country.code})`).join('\n');
+            } else {
+                message += 'No hay países registrados en este continente.';
+            }
+            
+            alert(message);
+        } catch (error) {
+            console.error('Error loading countries:', error);
+            this.showAlert('Error al cargar los países del continente', 'danger');
+        }
+    }
+
+    resetForm() {
+        this.currentContinentId = null;
+        document.getElementById('continentForm').reset();
+        document.getElementById('continentId').value = '';
+    }
+
+    showAlert(message, type) {
+        // Create and show Bootstrap alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(alertDiv);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
+    }
+}
+
+// Global functions for onclick events
+function showCreateContinentModal() {
+    continentManager.showCreateModal();
+}
+
+function refreshContinentData() {
+    continentManager.loadContinentData();
+}
+
+function saveContinentData() {
+    continentManager.saveContinentData();
+}
+
+function confirmDeleteContinent() {
+    continentManager.confirmDeleteContinent();
+}
+
+// Initialize manager when script loads
+let continentManager;
+$(document).ready(function() {
+    continentManager = new ContinentManager();
+});
+</script>
+                            <div class="mt-2">
+                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1">
+                                    <i class="bi bi-check-circle me-1"></i>Completo
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-people" style="font-size: 4rem; color: #17a2b8;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-info d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-people text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">7.8B</h3>
+                            <p class="text-muted mb-0 small">Población Total</p>
+                            <div class="mt-2">
+                                <span class="badge bg-info bg-opacity-10 text-info rounded-pill px-3 py-1">
+                                    <i class="bi bi-graph-up me-1"></i>Creciendo
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-geo-alt" style="font-size: 4rem; color: #ffc107;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-warning d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-geo-alt text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">149M</h3>
+                            <p class="text-muted mb-0 small">Área Total (km²)</p>
+                            <div class="mt-2">
+                                <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3 py-1">
+                                    <i class="bi bi-trophy me-1"></i>Asia Mayor
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100 shadow-lg hover-lift-light">
+                    <div class="card-body p-4 text-center position-relative overflow-hidden">
+                        <div class="position-absolute top-0 end-0 mt-n2 me-n2 opacity-10">
+                            <i class="bi bi-flag" style="font-size: 4rem; color: #dc3545;"></i>
+                        </div>
+                        <div class="position-relative">
+                            <div class="avatar-md bg-gradient-danger d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3 shadow">
+                                <i class="bi bi-flag text-white" style="font-size: 1.25rem;"></i>
+                            </div>
+                            <h3 class="mb-1 fw-bold text-dark">195</h3>
+                            <p class="text-muted mb-0 small">Países Totales</p>
+                            <div class="mt-2">
+                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1">
+                                    <i class="bi bi-graph-up me-1"></i>Diverso
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Data Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-white py-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm bg-gradient-primary d-flex align-items-center justify-content-center rounded me-3">
+                                    <i class="bi bi-table text-white"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Lista de Continentes Premium</h5>
+                                    <p class="text-muted mb-0 small">Gestiona todos los continentes con diseño moderno</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="py-3 border-0 fw-semibold">Continente</th>
+                                        <th class="py-3 border-0 fw-semibold">Área (km²)</th>
+                                        <th class="py-3 border-0 fw-semibold">Población</th>
+                                        <th class="py-3 border-0 fw-semibold">Países</th>
+                                        <th class="py-3 border-0 fw-semibold text-end pe-4">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover-shadow">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm bg-gradient-success d-flex align-items-center justify-content-center rounded me-3">
+                                                    <i class="bi bi-geo-alt text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">Asia</h6>
+                                                    <small class="text-muted">Continente más grande</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-medium">44,579,000</span></td>
+                                        <td>
+                                            <span class="fw-medium">4,641,054,775</span>
+                                            <small class="text-muted d-block">60% mundial</small>
+                                        </td>
+                                        <td><span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">48 países</span></td>
+                                        <td class="text-end pe-4">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">
+                                                <i class="bi bi-check-circle me-1"></i>Activo
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover-shadow">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm bg-gradient-info d-flex align-items-center justify-content-center rounded me-3">
+                                                    <i class="bi bi-geo-alt text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">África</h6>
+                                                    <small class="text-muted">Segundo más grande</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-medium">30,370,000</span></td>
+                                        <td>
+                                            <span class="fw-medium">1,340,598,147</span>
+                                            <small class="text-muted d-block">17% mundial</small>
+                                        </td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info rounded-pill">54 países</span></td>
+                                        <td class="text-end pe-4">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">
+                                                <i class="bi bi-check-circle me-1"></i>Activo
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover-shadow">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm bg-gradient-warning d-flex align-items-center justify-content-center rounded me-3">
+                                                    <i class="bi bi-geo-alt text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">América del Norte</h6>
+                                                    <small class="text-muted">Tercer más grande</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-medium">24,709,000</span></td>
+                                        <td>
+                                            <span class="fw-medium">579,024,000</span>
+                                            <small class="text-muted d-block">7.7% mundial</small>
+                                        </td>
+                                        <td><span class="badge bg-warning bg-opacity-10 text-warning rounded-pill">23 países</span></td>
+                                        <td class="text-end pe-4">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">
+                                                <i class="bi bi-check-circle me-1"></i>Activo
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover-shadow">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm bg-gradient-danger d-flex align-items-center justify-content-center rounded me-3">
+                                                    <i class="bi bi-geo-alt text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-semibold">América del Sur</h6>
+                                                    <small class="text-muted">Cuarto más grande</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="fw-medium">17,840,000</span></td>
+                                        <td>
+                                            <span class="fw-medium">434,254,119</span>
+                                            <small class="text-muted d-block">5.6% mundial</small>
+                                        </td>
+                                        <td><span class="badge bg-danger bg-opacity-10 text-danger rounded-pill">12 países</span></td>
+                                        <td class="text-end pe-4">
+                                            <span class="badge bg-success bg-opacity-10 text-success rounded-pill">
+                                                <i class="bi bi-check-circle me-1"></i>Activo
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%) !important;
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%) !important;
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%) !important;
+}
+
+.btn-gradient-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hover-lift-light:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.avatar-sm { width: 2rem; height: 2rem; }
+.avatar-md { width: 3rem; height: 3rem; }
+.avatar-lg { width: 4rem; height: 4rem; }
+</style>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Continent Service -->
+<script src="../../js/geolocation/continent.js"></script>
+
+<!-- Common JS -->
+<script src="../../js/common.js"></script>
+
+</body>
+</html>

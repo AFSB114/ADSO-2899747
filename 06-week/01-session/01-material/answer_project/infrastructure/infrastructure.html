@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure – Flight Management System</title>
+  <link rel="stylesheet" href="../asset/css/estilos.css">
+</head>
+<body>
+<header>
+  <h1>Infrastructure</h1>
+</header>
+<nav>
+  <a href="../index.html" class="nav-link">Inicio</a>
+  <a href="../geolocation/geolocation.html" class="nav-link">Geolocation</a>
+  <a href="infrastructure.html" class="nav-link active">Infrastructure</a>
+  <a href="../parameterization/parameterization.html" class="nav-link">Parameterization</a>
+  <a href="../security/security.html" class="nav-link">Security</a>
+  <a href="../human_resources/human_resources.html" class="nav-link">Human Resources</a>
+  <a href="../aircraft_management/aircraft_management.html" class="nav-link">Aircraft Management</a>
+  <a href="../flight_operations/flight_operations.html" class="nav-link">Flight Operations</a>
+  <a href="../passengers_services/passengers_services.html" class="nav-link">Passengers & Services</a>
+  <a href="../notifications/notifications.html" class="nav-link">Notifications</a>
+</nav>
+<main>
+  <div class="card">
+    <p>Defines physical infrastructure such as airports, terminals and boarding gates.</p>
+    <h2>Entities</h2>
+    <table>
+      <thead><tr><th>Entity</th><th>Attributes</th></tr></thead>
+      <tbody>
+      <tr><td><strong>airport</strong></td><td>id, code, name, address, city_id</td></tr>
+      <tr><td><strong>terminal</strong></td><td>id, code, name, airport_id</td></tr>
+      <tr><td><strong>boarding_gate</strong></td><td>id, code, name, terminal_id</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

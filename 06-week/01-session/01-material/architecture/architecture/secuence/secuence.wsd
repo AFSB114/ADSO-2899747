@@ -1,0 +1,28 @@
+@startuml
+title Flight Booking – Sequence Diagram
+
+actor Passenger
+participant "Security\n(Person)" as Person
+participant "Flight Operations\n(Flight)" as Flight
+participant "Flight Operations\n(Ticket)" as Ticket
+participant "Flight Operations\n(Baggage)" as Baggage
+participant "Notifications\n(Notification)" as Notification
+
+Passenger -> Person : Provide personal data
+Person --> Passenger : Validate identity
+
+Passenger -> Flight : Search available flight
+Flight --> Passenger : Return flight details
+
+Passenger -> Ticket : Request booking
+Ticket -> Flight : Verify availability
+Flight --> Ticket : Availability confirmed
+Ticket --> Passenger : Ticket created
+
+Passenger -> Baggage : Register baggage (optional)
+Baggage --> Passenger : Baggage confirmed
+
+Ticket -> Notification : Send booking confirmation
+Notification --> Passenger : Confirmation message delivered
+
+@enduml
