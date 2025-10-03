@@ -1,0 +1,73 @@
+**Diseño del sistema:** UrbanTracker se concibió con una arquitectura
+multicapa, separando claramente los componentes de frontend
+(aplicaciones de usuario) y backend (servidor central). En el
+**frontend**, se desarrollaron tres interfaces principales: (1) una
+aplicación web para los usuarios del transporte (público general) donde
+pueden consultar las rutas disponibles y ver en un mapa la ubicación en
+tiempo real de los autobuses; (2) una aplicación móvil nativa (Android)
+para los conductores, encargada de capturar las coordenadas GPS del
+vehículo y enviarlas al sistema; y (3) una interfaz web para
+administradores, accesible desde navegadores, que permite gestionar
+rutas, vehículos y conductores, además de monitorear la flota en un
+panel de control. Las aplicaciones web se implementaron usando **React**
+(Javascript/TypeScript), mientras que la aplicación móvil se desarrolló
+con **React Native** dada su capacidad multiplataforma y la facilidad de
+compartir lógica con el web.
+
+El **backend** se construyó en **Java** utilizando el framework **Spring
+Boot**, siguiendo una arquitectura modular con servicios RESTful para
+las funciones CRUD (crear, leer, actualizar, eliminar) y utilizando
+WebSockets (vía Socket.IO) y MQTT para la mensajería en tiempo real. En
+particular, se adoptó un modelo de publicación/suscripción (pub/sub)
+para el envío de ubicaciones: la aplicación móvil del conductor publica
+periódicamente mensajes con su posición GPS en un tópico específico, y
+los clientes suscritos (aplicación de usuario, panel admin) reciben esas
+actualizaciones al instante. Esta elección de diseño está alineada con
+otras soluciones de IoT y comunicación en sistemas distribuidos, donde
+un broker intermedia el flujo de mensajes para desacoplar emisores y
+receptores. Por ejemplo, Ortiz *et al.* (2022) documentan un módulo de
+comunicaciones autónomo desarrollado en Spring Boot que utiliza **MQTT**
+(broker Mosquitto) del lado del dispositivo y una base de datos en
+memoria **Redis** en el servidor bajo un modelo pub/sub, logrando una
+comunicación bidireccional eficiente entre máquinas y sistema
+central[\[4\]](https://bibliotecadigital.udea.edu.co/entities/publication/3eb20d8e-dece-489f-8bcc-89f009b482cf#:~:text=entre%20las%20m%C3%A1quinas%20y%20el,logrando%20as%C3%AD%20una%20comunicaci%C3%B3n%20bidireccional).
+Inspirados por ese enfoque, UrbanTracker emplea MQTT como opción ligera
+para el envío de datos GPS, apoyándose en un broker local que distribuye
+los mensajes de ubicación a los clientes suscritos en tiempo real.
+Alternativamente, el sistema puede operar vía **WebSockets** puros en
+entornos donde un broker MQTT no esté disponible, usando Socket.IO en el
+backend de Node.js (un microservicio complementario) para canalizar las
+posiciones a los usuarios. Ambas modalidades aseguran mínimos tiempos de
+latencia en la actualización de coordenadas.
+
+**Base de datos:** Se utilizó PostgreSQL para almacenar la información
+persistente del sistema. El esquema de datos incluye tablas para *rutas*
+(definidas por nombre, lista de paradas, etc.), *vehículos*
+(identificación, modelo, estado, asignación a ruta), *conductores*
+(perfil de usuario, credenciales) y *registros de recorrido* (asociando
+conductores con vehículos y rutas en un intervalo temporal, incluyendo
+sus trazas de posición). Adicionalmente, se almacenan logs básicos de
+actividad para auditoría (por ejemplo, cambios realizados por
+administradores). La elección de un SGBD SQL robusto obedece a la
+necesidad de consultas relacionales eficientes (e.g., listar conductores
+asignados a cierta ruta, obtener historial de posiciones de un vehículo,
+etc.) y garantizar la integridad referencial entre entidades. Todas las
+transacciones relevantes son expuestas a través de una API REST, con
+control de acceso mediante autenticación JWT (JSON Web Tokens) para las
+operaciones de conductor y administrador. Asimismo, se implementaron
+roles de usuario bien definidos (público, conductor autenticado,
+administrador) para restringir acciones según privilegios, en
+concordancia con las mejores prácticas de seguridad (p. ej., uso de
+HTTPS y hash seguro de contraseñas, tal como se estipuló en los
+requisitos no funcionales de seguridad).
+
+**Integración de mapas:** Para la visualización geográfica se integró la
+API de **Mapbox**, tanto en la web de usuario (mostrando marcadores de
+autobuses en tiempo real sobre el mapa) como en la aplicación móvil (por
+ejemplo, para mostrar al conductor su ruta asignada y eventualmente
+permitirle ver paradas). La API se consumió mediante librerías
+especializadas. Esta integración permite ofrecer una interfaz familiar
+al usuario y aprovechar funciones avanzadas como el cálculo de rutas o
+la visualización del tráfico en tiempo real, aunque en esta fase inicial
+se usó principalmente para la representación estática de la ubicación de
+los vehículos.
