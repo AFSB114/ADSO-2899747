@@ -1,8 +1,0 @@
-Los autores agradecen al equipo de desarrollo de UrbanTracker por su
-dedicación en las distintas fases del proyecto, en especial a Brayan E.
-Carvajal, Diego F. Cuéllar y Carlos J. Rodríguez por sus valiosas
-contribuciones de programación y pruebas. Asimismo, se extiende nuestro
-agradecimiento al Servicio Nacional de Aprendizaje (SENA) y sus
-instructores por el apoyo institucional y técnico brindado durante la
-realización de este trabajo. Su orientación y recursos fueron
-fundamentales para alcanzar los objetivos propuestos.
