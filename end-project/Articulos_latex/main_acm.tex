@@ -1,0 +1,39 @@
+\documentclass[sigconf,nonacm]{acmart}
+
+\input{includes/preamble_common}
+\input{includes/preamble_acm}
+
+\AtBeginDocument{\providecommand\BibTeX{{\sc Bib}\TeX}}
+
+\title[UrbanTracker]{UrbanTracker: Sistema de geolocalización de flota de vehículos en tiempo real}
+
+\author{Andres Felipe Suaza Bustos}
+\affiliation{%
+  \institution{Servicio Nacional de Aprendizaje (SENA), Regional Huila, CIES, Ficha 2899747}
+  \city{Neiva}
+  \country{Colombia}}
+\email{afsuaza29@soy.sena.edu.co}
+\email{asuazb13@gmail.com}
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\keywords{rastreo en tiempo real, geolocalización, MQTT, React Native, Spring Boot}
+
+\begin{document}
+\maketitle
+
+\input{sections/01_introduccion}
+\input{sections/02_relacionados}
+\input{sections/03_metodologia}
+\input{sections/04_implementacion}
+\input{sections/05_resultados}
+\input{sections/06_discusion}
+\input{sections/07_conclusiones}
+\input{sections/A1_apendices}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography/references}
+
+\end{document}
